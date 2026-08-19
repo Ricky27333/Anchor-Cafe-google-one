@@ -5,25 +5,27 @@
       "@type": "CafeOrCoffeeShop",
       "@id": "https://anchorcafechirala.in/#cafe",
       "name": "Anchor Cafe",
-      "alternateName": "Anchor Beachfront Cafe & Roasters",
+      "alternateName": "Anchor Beachfront Cafe & Roasters (Choramandal)",
       "image": [
+        "https://anchorcafechirala.in/assets/images/anchor_cafe_logo.jpg",
         "https://anchorcafechirala.in/assets/images/hero_coastal_cafe.jpg",
-        "https://anchorcafechirala.in/assets/images/story_craft_coffee.jpg",
-        "https://anchorcafechirala.in/assets/images/sunset_mojitos.jpg"
+        "https://anchorcafechirala.in/assets/images/sunset_mojitos.jpg",
+        "https://anchorcafechirala.in/assets/images/milkshakes_icecreams.jpg"
       ],
       "url": "https://anchorcafechirala.in",
-      "telephone": "+91-98765-43210",
+      "telephone": "+918008370274",
       "priceRange": "₹₹",
       "servesCuisine": [
         "Specialty Coffee",
-        "Artisanal Mojitos & Coolers",
-        "Gourmet Milkshakes & Frappes",
-        "Coastal Sourdough Brunch & Bakery",
-        "Sunset Desserts"
+        "Handcrafted Mojitos & Coolers",
+        "Gourmet Milkshakes",
+        "Artisanal Ice Creams",
+        "Beachside Savory Snacks",
+        "Choramandal Coastal Brunch"
       ],
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Ramapuram Beach Road, Beachfront Promenade",
+        "streetAddress": "Ramapuram Beach Road, Promenade",
         "addressLocality": "Chirala",
         "addressRegion": "Andhra Pradesh",
         "postalCode": "523157",
@@ -42,12 +44,19 @@
             "Tuesday",
             "Wednesday",
             "Thursday",
-            "Friday",
+            "Friday"
+          ],
+          "opens": "05:00",
+          "closes": "22:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
             "Saturday",
             "Sunday"
           ],
-          "opens": "07:00",
-          "closes": "22:30"
+          "opens": "05:00",
+          "closes": "23:30"
         }
       ],
       "aggregateRating": {
@@ -58,124 +67,7 @@
         "worstRating": "1"
       },
       "hasMenu": "https://anchorcafechirala.in/#menu",
-      "acceptsReservations": "True",
-      "amenityFeature": [
-        {
-          "@type": "LocationFeatureSpecification",
-          "name": "Direct Bay of Bengal Oceanfront Seating",
-          "value": true
-        },
-        {
-          "@type": "LocationFeatureSpecification",
-          "name": "Pet-Friendly Deck",
-          "value": true
-        },
-        {
-          "@type": "LocationFeatureSpecification",
-          "name": "Free High-Speed Wi-Fi",
-          "value": true
-        },
-        {
-          "@type": "LocationFeatureSpecification",
-          "name": "Dedicated Car & Bike Beach Parking",
-          "value": true
-        },
-        {
-          "@type": "LocationFeatureSpecification",
-          "name": "Live Acoustic Sunset Sessions",
-          "value": true
-        }
-      ]
-    },
-    {
-      "@type": "Menu",
-      "@id": "https://anchorcafechirala.in/#menu",
-      "name": "Anchor Cafe Coastal Menu",
-      "inLanguage": "en-IN",
-      "hasMenuSection": [
-        {
-          "@type": "MenuSection",
-          "name": "Artisanal Mojitos & Coolers",
-          "hasMenuItem": [
-            {
-              "@type": "MenuItem",
-              "name": "Ramapuram Sunset Mojito",
-              "description": "Fresh muddled garden mint, zesty key lime, sparkling soda, and passionfruit sunset syrup over crushed ice.",
-              "offers": {
-                "@type": "Offer",
-                "price": "220",
-                "priceCurrency": "INR"
-              }
-            },
-            {
-              "@type": "MenuItem",
-              "name": "Blue Bay Coconut Fizz",
-              "description": "Hydrating tender coconut water, blue curaçao botanical infusion, fresh basil leaves, and fizzy lemon spritz.",
-              "offers": {
-                "@type": "Offer",
-                "price": "210",
-                "priceCurrency": "INR"
-              }
-            }
-          ]
-        },
-        {
-          "@type": "MenuSection",
-          "name": "Specialty Espresso & Cold Brews",
-          "hasMenuItem": [
-            {
-              "@type": "MenuItem",
-              "name": "Coastal Cold Brew Reserve",
-              "description": "18-hour steeped single-origin Arabica with notes of caramel and toasted cocoa, served over crystal clear ice rock.",
-              "offers": {
-                "@type": "Offer",
-                "price": "195",
-                "priceCurrency": "INR"
-              }
-            },
-            {
-              "@type": "MenuItem",
-              "name": "Gold Foamed Sea Salt Latte",
-              "description": "Double shot espresso infused with steamed oat milk, sea salt caramel foam, and edible gold shimmer.",
-              "offers": {
-                "@type": "Offer",
-                "price": "230",
-                "priceCurrency": "INR"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://anchorcafechirala.in/#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Where is Anchor Cafe located in Chirala?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Anchor Cafe is located right on Ramapuram Beach Road overlooking the coastline in Chirala, Andhra Pradesh, India."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What are the signature drinks at Anchor Cafe?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Our signatures include the Ramapuram Sunset Mojito, 18-Hour Coastal Cold Brew Reserve, Blue Bay Coconut Fizz, and Lotus Biscoff Crunch Frappe."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is Anchor Cafe pet-friendly and does it have parking?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, Anchor Cafe features a pet-friendly beach deck and dedicated parking for both cars and motorcycles."
-          }
-        }
-      ]
+      "acceptsReservations": "True"
     }
   ]
 }

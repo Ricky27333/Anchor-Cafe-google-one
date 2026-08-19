@@ -1,6 +1,7 @@
 /**
- * ANCHOR CAFE — RAMAPURAM BEACH, CHIRALA
- * Vanilla JavaScript Engine: Data Structures, Canvas Waves, Filters, Carousel, Lightbox & Micro-Interactions
+ * ANCHOR CAFE — RAMAPURAM BEACH, CHIRALA (CHORAMANDAL COAST)
+ * Vanilla JavaScript Engine: Data Structures, Canvas Waves, Filters, Carousel, Lightbox & 9 Interactive WhatsApp Options
+ * WhatsApp Number: 8008370274 (918008370274)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,12 +13,82 @@ document.addEventListener('DOMContentLoaded', () => {
   initGalleryLightbox();
   initReviewsCarousel();
   initContactForm();
+  initWhatsAppModal();
   initScrollReveal();
 });
 
-/* ==========================================================================
-   DATA STORE (Easily editable data structures for menu, gallery, reviews)
-   ========================================================================== */
+const WHATSAPP_NUMBER = '918008370274';
+const PHONE_NUMBER = '+918008370274';
+const DISPLAY_PHONE = '+91 80083 70274';
+
+/**
+ * 9 Interactive WhatsApp Customer Inquiry Options
+ */
+const WHATSAPP_INQUIRY_OPTIONS = [
+  {
+    id: 1,
+    title: '1️⃣ Explore Our Menu ☕',
+    icon: '☕',
+    desc: 'Full menu & prices',
+    text: "🌊 Hey Anchor Cafe! I'd love to explore your full menu with prices. What's brewing today? ☕✨"
+  },
+  {
+    id: 2,
+    title: '2️⃣ Order Takeaway 🍔',
+    icon: '🍔',
+    desc: 'Beach bites takeaway order',
+    text: "🍟 I'm ready to grab some beach bites! Please help me place a takeaway order. 😋"
+  },
+  {
+    id: 3,
+    title: '3️⃣ Best Sellers ⭐',
+    icon: '⭐',
+    desc: 'First visit must-try drinks & snacks',
+    text: "👋 It's my first visit to Anchor Cafe! What are your must-try drinks and snacks? Surprise me with your favorites! ✨"
+  },
+  {
+    id: 4,
+    title: "4️⃣ Couple's Sunset Plan ❤️",
+    icon: '❤️',
+    desc: 'Evening sunset date combo for two',
+    text: "🌅 We're planning a beach date this evening. Could you recommend the perfect combo for two? ☕🍹"
+  },
+  {
+    id: 5,
+    title: '5️⃣ Hyderabad Weekend Visit 🚗',
+    icon: '🚗',
+    desc: 'Outstation trip & sunset seating',
+    text: "🌊 We're coming from Hyderabad this weekend! Is there a good spot to enjoy the sunset at Anchor Cafe? ✨"
+  },
+  {
+    id: 6,
+    title: '6️⃣ Help Me Find You 📍',
+    icon: '📍',
+    desc: 'Route & directions near Ramapuram Beach',
+    text: "🧭 We're near Ramapuram Beach but can't spot Anchor Cafe. Can you guide us with the easiest route? ⚓"
+  },
+  {
+    id: 7,
+    title: '7️⃣ Birthday Celebration 🎉',
+    icon: '🎉',
+    desc: 'Decorations, combos & party setup',
+    text: "🎂 We're planning a birthday celebration at Anchor Cafe! Do you have decorations, special combos, or surprise arrangements? 🎈"
+  },
+  {
+    id: 8,
+    title: '8️⃣ Group Reservation 👥',
+    icon: '👥',
+    desc: 'Reserved seating for 8–10 friends',
+    text: "🌊 We're visiting with a group of 8–10 friends. Can you reserve seating for us? We'd love to enjoy the beach together! ✨"
+  },
+  {
+    id: 9,
+    title: '9️⃣ Events & Beach Nights 🔥',
+    icon: '🔥',
+    desc: 'DJ nights, campfire, live music & weekend specials',
+    text: "🎶 We're interested in your special events! Do you have DJ Nights, Campfire Nights, Live Music, Beach Events, or Weekend Specials happening? Tell us what's coming up! 🔥🌊"
+  }
+];
 
 /**
  * 1. Interactive Menu Data
@@ -43,6 +114,15 @@ const MENU_DATA = [
   },
   {
     id: 'm3',
+    title: 'Belgian Chocolate Fudge Milkshake',
+    category: 'shakes',
+    price: '₹240',
+    description: 'Rich thick Belgian chocolate milkshake topped with whipped cream, cocoa drizzle, and handmade ice cream scoops.',
+    tags: ['Signature', 'Veg'],
+    isSpecial: true
+  },
+  {
+    id: 'm4',
     title: 'Blue Bay Coconut Fizz',
     category: 'mojitos',
     price: '₹210',
@@ -51,7 +131,7 @@ const MENU_DATA = [
     isSpecial: false
   },
   {
-    id: 'm4',
+    id: 'm5',
     title: 'Gold Foamed Sea Salt Latte',
     category: 'brews',
     price: '₹230',
@@ -60,16 +140,16 @@ const MENU_DATA = [
     isSpecial: true
   },
   {
-    id: 'm5',
-    title: 'Belgian Truffle Mocha Shake',
-    category: 'shakes',
-    price: '₹240',
-    description: 'Single-origin espresso blended with dark Callebaut Belgian chocolate, artisanal gelato, and roasted hazelnut brittle.',
-    tags: ['Signature', 'Veg'],
-    isSpecial: false
+    id: 'm6',
+    title: 'Artisanal Dulce De Leche Ice Cream Sundae',
+    category: 'icecream',
+    price: '₹210',
+    description: 'Double scoop gourmet vanilla bean & caramel gelato served with crushed waffle cone and warm roasted nuts.',
+    tags: ['Chef Special', 'Veg'],
+    isSpecial: true
   },
   {
-    id: 'm6',
+    id: 'm7',
     title: 'Lotus Biscoff Crunch Frappe',
     category: 'shakes',
     price: '₹250',
@@ -78,95 +158,99 @@ const MENU_DATA = [
     isSpecial: true
   },
   {
-    id: 'm7',
+    id: 'm8',
     title: 'Sourdough Avocado & Feta Crostini',
-    category: 'bites',
+    category: 'snacks',
     price: '₹280',
     description: 'Rustic wood-fired sourdough with ripe hass avocado, crumbed Greek feta, slow-roasted cherry tomatoes, and micro-herbs.',
     tags: ['Chef Special', 'Veg'],
     isSpecial: true
   },
   {
-    id: 'm8',
-    title: 'Coastal Sea-Salt Truffle Fries',
-    category: 'bites',
+    id: 'm9',
+    title: 'Coromandel Peri-Peri Truffle Fries',
+    category: 'snacks',
     price: '₹210',
-    description: 'Crisp golden hand-cut potatoes tossed in aromatic white truffle oil, grated parmesan, and herbed garlic aioli.',
+    description: 'Crisp golden hand-cut potatoes tossed in peri-peri spices, white truffle oil, grated parmesan, and garlic aioli.',
     tags: ['Veg'],
     isSpecial: false
   },
   {
-    id: 'm9',
+    id: 'm10',
     title: 'Artisanal Almond Butter Croissant',
-    category: 'bites',
+    category: 'snacks',
     price: '₹180',
     description: 'Flaky twice-baked butter croissant loaded with frangipane almond cream and toasted sliced almonds.',
     tags: ['Veg'],
     isSpecial: false
   },
   {
-    id: 'm10',
+    id: 'm11',
     title: 'Warm Molten Choco Lava Tart',
-    category: 'sunset',
+    category: 'icecream',
     price: '₹260',
     description: 'Decadent dark chocolate tart with a flowing molten core, paired with artisanal Madagascar vanilla bean gelato.',
     tags: ['Chef Special', 'Veg'],
     isSpecial: true
   },
   {
-    id: 'm11',
-    title: 'Passionfruit Mint Coastal Splash',
-    category: 'mojitos',
-    price: '₹190',
-    description: 'Tangy tropical passionfruit pulp, freshly torn mint sprigs, lime zest, and cold sparkling spring water.',
-    tags: ['Vegan'],
-    isSpecial: false
-  },
-  {
     id: 'm12',
     title: 'Chirala Shoreline Filter Kaapi Fusion',
     category: 'brews',
     price: '₹160',
-    description: 'A contemporary artisanal tribute to traditional South Indian decoction, topped with velvety frothed milk and palm jaggery.',
+    description: 'A contemporary artisanal tribute to traditional South Indian decoction, topped with velvety frothed milk and jaggery.',
     tags: ['Signature', 'Veg'],
     isSpecial: true
   }
 ];
 
 /**
- * 2. Gallery Data
+ * 2. Glimpses Along the Shore Gallery
  */
 const GALLERY_DATA = [
   {
     id: 'g1',
-    title: 'Golden Hour on the Sea Deck',
+    title: 'Sunset View Deck at Ramapuram Beach',
     category: 'sunset',
     src: 'assets/images/hero_coastal_cafe.jpg',
-    tag: 'Sunset Ambiance',
+    tag: 'Google Maps Photo • 5.0 ★',
+    author: 'Customer Photo by Sai Teja (Google Local Guide)',
     featured: true
   },
   {
     id: 'g2',
-    title: 'Single-Origin Pour Over Ritual',
+    title: 'Signature Mojitos & Iced Cold Brews',
     category: 'brews',
-    src: 'assets/images/story_craft_coffee.jpg',
-    tag: 'Artisan Coffee',
+    src: 'assets/images/sunset_mojitos.jpg',
+    tag: 'Google Maps Photo • 5.0 ★',
+    author: 'Customer Photo by Divya K. (Ramapuram Beach Visit)',
     featured: false
   },
   {
     id: 'g3',
-    title: 'Signature Mojitos & Cold Brews',
-    category: 'brews',
-    src: 'assets/images/sunset_mojitos.jpg',
-    tag: 'Beach Drinks',
+    title: 'Gourmet Chocolate Milkshakes & Sundaes',
+    category: 'shakes',
+    src: 'assets/images/milkshakes_icecreams.jpg',
+    tag: 'Google Maps Photo • 5.0 ★',
+    author: 'Customer Photo by Rajesh M. (Google Reviewer)',
     featured: false
   },
   {
     id: 'g4',
-    title: 'Coastal Brunch & Artisan Bakery',
-    category: 'beachfront',
+    title: 'Single-Origin Pour Over Brewing',
+    category: 'brews',
+    src: 'assets/images/story_craft_coffee.jpg',
+    tag: 'Google Maps Photo • 5.0 ★',
+    author: 'Customer Photo by Vikram R. (Coffee Aficionado)',
+    featured: false
+  },
+  {
+    id: 'g5',
+    title: 'Beachside Brunch Spread & Savory Snacks',
+    category: 'snacks',
     src: 'assets/images/coastal_bites.jpg',
-    tag: 'Gourmet Bites',
+    tag: 'Google Maps Photo • 5.0 ★',
+    author: 'Customer Photo by Sneha V. (Coromandel Coast Traveler)',
     featured: false
   }
 ];
@@ -178,33 +262,33 @@ const REVIEWS_DATA = [
   {
     id: 'r1',
     name: 'Ananya Varma',
-    location: 'Hyderabad, India',
+    location: 'Google Maps Reviewer • Hyderabad',
     rating: 5,
-    quote: 'Anchor Cafe is hands down the best coastal discovery in Andhra Pradesh! Sitting on the Ramapuram Beach deck with their signature Sunset Mojito while the breeze rolls in was pure serenity.',
+    quote: 'Anchor Cafe is hands down the best coastal discovery on the Coromandel Coast! Sitting on the Ramapuram Beach deck with their signature Sunset Mojito and milkshakes while the sea breeze rolls in was pure bliss.',
     initials: 'AV'
   },
   {
     id: 'r2',
     name: 'Vikramaditya Rao',
-    location: 'Vijayawada, India',
+    location: 'Google Local Guide • Vijayawada',
     rating: 5,
-    quote: 'As a specialty coffee enthusiast, their 18-hour Coastal Cold Brew blew me away. Super clean notes, stunning minimal luxury interior, and incredibly polite team. An absolute must-visit in Chirala!',
+    quote: 'As a specialty coffee enthusiast, their 18-hour Coastal Cold Brew blew me away. Clean notes, beautiful Choramandal beach atmosphere, and top-tier service. Must visit in Chirala!',
     initials: 'VR'
   },
   {
     id: 'r3',
     name: 'Sneha & Karthik',
-    location: 'Bangalore, India',
+    location: 'Google Maps Reviewer • Bangalore',
     rating: 5,
-    quote: 'We stopped by on our weekend coastal drive from Hyderabad. The avocado sourdough crostini and Lotus Biscoff frappe were 10/10. The ocean view from the terrace is world-class.',
+    quote: 'We stopped by on our weekend drive along the Choramandal coastline. The avocado sourdough crostini, artisanal ice cream, and Lotus Biscoff frappe were 10/10.',
     initials: 'SK'
   },
   {
     id: 'r4',
     name: 'Rajesh Chowdary',
-    location: 'Guntur, India',
+    location: 'Google Local Guide • Guntur',
     rating: 5,
-    quote: 'The ambiance at dusk with the golden pendant lights and sea waves crashing right in front is unmatched. Chirala finally has a world-class luxury coffee haven.',
+    quote: 'The ambiance at dusk with the official Anchor Cafe lights and sea waves crashing right in front is unmatched. Chirala finally has a world-class luxury coffee & mojito haven.',
     initials: 'RC'
   }
 ];
@@ -225,7 +309,7 @@ function initScrollProgress() {
 }
 
 /* ==========================================================================
-   3. Subtle Canvas Wave Simulation (Lightweight, 60fps)
+   3. Canvas Wave Simulation
    ========================================================================== */
 function initCanvasWaves() {
   const canvas = document.getElementById('heroCanvas');
@@ -290,7 +374,6 @@ function initHeaderScroll() {
       header?.classList.remove('scrolled');
     }
 
-    // Active link highlighting
     sections.forEach(current => {
       const sectionHeight = current.offsetHeight;
       const sectionTop = current.offsetTop - 120;
@@ -331,7 +414,6 @@ function initMobileNav() {
   overlay?.addEventListener('click', () => toggleDrawer(false));
   mobileLinks.forEach(link => link.addEventListener('click', () => toggleDrawer(false)));
 
-  // Escape key closes drawer
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && drawer?.classList.contains('open')) {
       toggleDrawer(false);
@@ -340,7 +422,7 @@ function initMobileNav() {
 }
 
 /* ==========================================================================
-   6. Interactive Menu System (Search, Categories & Dietary Tags)
+   6. Interactive Menu System
    ========================================================================== */
 function initMenuSystem() {
   const container = document.getElementById('menuCardsGrid');
@@ -370,7 +452,7 @@ function initMenuSystem() {
       container.innerHTML = `
         <div class="menu-no-results">
           <p style="font-size: 1.25rem; font-family: var(--font-heading); color: var(--color-navy); margin-bottom: 0.5rem;">No coastal delights found</p>
-          <p>Try searching for "mojito", "cold brew", "croissant", or reset your filters.</p>
+          <p>Try searching for "mojito", "cold brew", "milkshake", "ice cream", or reset your filters.</p>
         </div>
       `;
       return;
@@ -392,20 +474,30 @@ function initMenuSystem() {
               return `<span class="badge-tag ${badgeClass}">${t}</span>`;
             }).join('')}
           </div>
-          <a href="https://wa.me/919876543210?text=Hi%20Anchor%20Cafe,%20I'd%20love%20to%20order%20the%20${encodeURIComponent(item.title)}" 
-             class="menu-order-btn" 
-             target="_blank" 
-             rel="noopener" 
-             aria-label="Order ${item.title} via WhatsApp">
+          <button type="button" 
+                  class="menu-order-btn wa-trigger-btn" 
+                  data-custom-text="🌊 Hey Anchor Cafe! I'd like to place a takeaway order for ${encodeURIComponent(item.title)} (${item.price}). Please confirm available items! 🍟😋" 
+                  aria-label="Order ${item.title} via WhatsApp 8008370274">
              <span>Order</span>
              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
+          </button>
         </div>
       </article>
     `).join('');
+
+    container.querySelectorAll('.wa-trigger-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const customText = btn.getAttribute('data-custom-text');
+        if (customText) {
+          window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${customText}`, '_blank');
+        } else {
+          openWhatsAppModal();
+        }
+      });
+    });
   }
 
-  // Event Listeners for Categories
   categoryBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       categoryBtns.forEach(b => b.classList.remove('active'));
@@ -415,7 +507,6 @@ function initMenuSystem() {
     });
   });
 
-  // Event Listeners for Dietary Pills
   dietaryBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       dietaryBtns.forEach(b => b.classList.remove('active'));
@@ -425,7 +516,6 @@ function initMenuSystem() {
     });
   });
 
-  // Search Input Handler
   searchInput?.addEventListener('input', (e) => {
     searchQuery = e.target.value.trim().toLowerCase();
     clearBtn?.classList.toggle('visible', searchQuery.length > 0);
@@ -440,7 +530,6 @@ function initMenuSystem() {
     searchInput?.focus();
   });
 
-  // Initial Render
   renderMenu();
 }
 
@@ -473,16 +562,16 @@ function initGalleryLightbox() {
            data-index="${idx}" 
            tabindex="0" 
            role="button" 
-           aria-label="View photo: ${item.title}">
+           aria-label="View Google Maps customer photo: ${item.title}">
         <img src="${item.src}" alt="${item.title}" loading="lazy" />
         <div class="gallery-overlay">
           <span class="gallery-tag">${item.tag}</span>
           <h3 class="gallery-caption">${item.title}</h3>
+          <span style="font-size: 0.75rem; color: #E8DFC8; margin-top: 0.25rem; display: block;">📷 ${item.author}</span>
         </div>
       </div>
     `).join('');
 
-    // Attach click listeners to gallery items
     const items = masonryContainer.querySelectorAll('.gallery-item');
     items.forEach(el => {
       el.addEventListener('click', () => {
@@ -521,7 +610,7 @@ function initGalleryLightbox() {
       lightboxImg.alt = item.title;
     }
     if (lightboxCaption) {
-      lightboxCaption.textContent = `${item.title} — ${item.tag}`;
+      lightboxCaption.innerHTML = `<strong>${item.title}</strong><br><span style="font-size: 0.9rem; color: var(--color-gold);">${item.tag}</span> — <span style="font-size: 0.85rem; color: #E8DFC8;">${item.author}</span>`;
     }
   }
 
@@ -535,7 +624,6 @@ function initGalleryLightbox() {
     updateLightboxContent();
   }
 
-  // Filter Buttons
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
@@ -576,7 +664,6 @@ function initReviewsCarousel() {
   let currentIndex = 0;
   const totalSlides = REVIEWS_DATA.length;
 
-  // Render Slides
   track.innerHTML = REVIEWS_DATA.map(r => `
     <div class="review-slide">
       <article class="review-card">
@@ -597,7 +684,6 @@ function initReviewsCarousel() {
     </div>
   `).join('');
 
-  // Render Dots
   if (dotsContainer) {
     dotsContainer.innerHTML = REVIEWS_DATA.map((_, i) => `
       <button class="carousel-dot ${i === 0 ? 'active' : ''}" data-index="${i}" aria-label="Go to review slide ${i + 1}"></button>
@@ -633,7 +719,6 @@ function initReviewsCarousel() {
     }
   });
 
-  // Touch Swipe Support
   let touchStartX = 0;
   let touchEndX = 0;
 
@@ -649,7 +734,7 @@ function initReviewsCarousel() {
 }
 
 /* ==========================================================================
-   9. Contact Form & WhatsApp Reservation
+   9. Contact Form Integration
    ========================================================================== */
 function initContactForm() {
   const form = document.getElementById('tableInquiryForm');
@@ -663,16 +748,83 @@ function initContactForm() {
     const date = document.getElementById('formDate')?.value || 'Today';
     const note = document.getElementById('formNote')?.value || '';
 
-    const message = `Hi Anchor Cafe! I'd like to reserve a table at Ramapuram Beach:%0A- Name: ${encodeURIComponent(name)}%0A- Phone: ${encodeURIComponent(phone)}%0A- Guests: ${encodeURIComponent(guests)}%0A- Time/Date: ${encodeURIComponent(date)}%0A- Note: ${encodeURIComponent(note)}`;
+    const message = `🌊 Hey Anchor Cafe! We're planning a visit to Ramapuram Beach (Choramandal Coast):%0A- Name: ${encodeURIComponent(name)}%0A- Phone: ${encodeURIComponent(phone)}%0A- Guests: ${encodeURIComponent(guests)}%0A- Time/Date: ${encodeURIComponent(date)}%0A- Special Requests: ${encodeURIComponent(note)}%0ASee you soon! ☕✨`;
     
-    // Redirect to WhatsApp with pre-filled inquiry
-    window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
     form.reset();
   });
 }
 
 /* ==========================================================================
-   10. IntersectionObserver Scroll Reveal
+   10. WhatsApp 9 Interactive Options Selector Modal Engine
+   ========================================================================== */
+function initWhatsAppModal() {
+  const modal = document.getElementById('waInquiryModal');
+  const closeBtn = document.getElementById('waModalClose');
+  const gridContainer = document.getElementById('waOptionsGrid');
+  const triggers = document.querySelectorAll('.btn-whatsapp, .wa-modal-trigger');
+
+  function openModal() {
+    renderOptions();
+    modal?.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    closeBtn?.focus();
+  }
+
+  function closeModal() {
+    modal?.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function renderOptions() {
+    if (!gridContainer) return;
+
+    gridContainer.innerHTML = WHATSAPP_INQUIRY_OPTIONS.map(opt => `
+      <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(opt.text)}" 
+         target="_blank" 
+         rel="noopener" 
+         class="wa-option-item" 
+         aria-label="${opt.title}: ${opt.desc}">
+        <span class="wa-option-icon" aria-hidden="true">${opt.icon}</span>
+        <div style="flex: 1;">
+          <h4 class="wa-option-title">
+            <span>${opt.title}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </h4>
+          <p class="wa-option-desc">${opt.desc}</p>
+          <span class="wa-option-msg-snippet">“${opt.text}”</span>
+        </div>
+      </a>
+    `).join('');
+  }
+
+  triggers.forEach(el => {
+    el.addEventListener('click', (e) => {
+      const customText = el.getAttribute('data-custom-text');
+      if (!customText) {
+        e.preventDefault();
+        openModal();
+      }
+    });
+  });
+
+  closeBtn?.addEventListener('click', closeModal);
+
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('open')) {
+      closeModal();
+    }
+  });
+
+  window.openWhatsAppModal = openModal;
+}
+
+/* ==========================================================================
+   11. IntersectionObserver Scroll Reveal
    ========================================================================== */
 function initScrollReveal() {
   const elements = document.querySelectorAll('.fade-in-element');

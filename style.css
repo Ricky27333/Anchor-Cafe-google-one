@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ANCHOR CAFE — RAMAPURAM BEACH, CHIRALA
+   ANCHOR CAFE — RAMAPURAM BEACH, CHIRALA (CHORAMANDAL COAST)
    Production-grade Coastal Luxury Design System & Stylesheet
    Brand Palette: Navy #0B2545, Cream #F8F5EF, Soft Sand #E8DFC8, Muted Gold #C9A86A, Deep Charcoal #222222
    ========================================================================== */
@@ -157,7 +157,6 @@ ul, ol {
   list-style: none;
 }
 
-/* Focus Visibility & Accessibility */
 :focus {
   outline: none;
 }
@@ -216,10 +215,6 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: clamp(1rem, 4vw, 2.5rem);
 }
 
-.container-narrow {
-  max-width: var(--container-narrow);
-}
-
 .section-padding {
   padding-top: var(--space-section);
   padding-bottom: var(--space-section);
@@ -264,13 +259,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-charcoal-muted);
   line-height: 1.6;
 }
-
-/* Text color helpers */
-.text-gold { color: var(--color-gold); }
-.text-navy { color: var(--color-navy); }
-.text-sand { color: var(--color-sand); }
-.text-cream { color: var(--color-cream); }
-.text-muted { color: var(--color-charcoal-muted); }
 
 /* Scroll Progress Bar */
 .scroll-progress-container {
@@ -402,7 +390,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .site-header.scrolled {
-  background: rgba(248, 245, 239, 0.92);
+  background: rgba(248, 245, 239, 0.94);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 4px 20px rgba(11, 37, 69, 0.08);
@@ -428,7 +416,6 @@ h1, h2, h3, h4, h5, h6 {
   height: 100%;
 }
 
-/* Brand Logo */
 .brand-link {
   display: flex;
   align-items: center;
@@ -450,13 +437,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .brand-link:hover .brand-icon-wrap {
   transform: rotate(-10deg) scale(1.05);
-}
-
-.brand-icon-wrap img,
-.brand-icon-wrap svg {
-  width: 24px;
-  height: 24px;
-  color: var(--color-gold);
 }
 
 .brand-text-block {
@@ -483,7 +463,6 @@ h1, h2, h3, h4, h5, h6 {
   transition: color var(--transition-smooth);
 }
 
-/* Desktop Nav */
 .desktop-nav {
   display: flex;
   align-items: center;
@@ -527,7 +506,6 @@ h1, h2, h3, h4, h5, h6 {
   gap: 0.85rem;
 }
 
-/* Mobile Toggle */
 .mobile-nav-toggle {
   display: none;
   flex-direction: column;
@@ -881,34 +859,42 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.03);
 }
 
+/* Fixed Floating Badge Layout & Text Wrapping */
 .story-badge-floating {
   position: absolute;
   bottom: -20px;
   right: -20px;
   background: var(--color-navy);
   color: var(--color-cream);
-  padding: 1.5rem;
+  padding: 1.25rem 1.65rem;
   border-radius: var(--radius-lg);
   border: 2px solid var(--color-gold);
   box-shadow: var(--shadow-card-hover);
-  max-width: 220px;
+  min-width: 240px;
+  max-width: 290px;
   text-align: center;
+  z-index: 5;
 }
 
 .story-badge-year {
   font-family: var(--font-heading);
-  font-size: 2.25rem;
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem);
   font-weight: 700;
   color: var(--color-gold);
-  line-height: 1;
-  margin-bottom: 0.25rem;
+  line-height: 1.25;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.35rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .story-badge-caption {
-  font-size: var(--text-xs);
-  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-sand);
+  line-height: 1.35;
 }
 
 .story-content-block {
@@ -1024,7 +1010,6 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
 }
 
-/* Category Filter Tabs */
 .menu-category-tabs {
   display: flex;
   align-items: center;
@@ -1057,7 +1042,6 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: var(--shadow-sm);
 }
 
-/* Dietary Toggle Pills */
 .dietary-filter-bar {
   display: flex;
   align-items: center;
@@ -1084,7 +1068,6 @@ h1, h2, h3, h4, h5, h6 {
   border-color: var(--color-navy-soft);
 }
 
-/* Menu Grid */
 .menu-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -1391,7 +1374,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.08em;
 }
 
-/* Accessible Lightbox Modal */
+/* Lightbox Modal */
 .lightbox-modal {
   position: fixed;
   inset: 0;
@@ -1965,7 +1948,183 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --------------------------------------------------------------------------
-   16. Micro-Interactions & Responsive Breakpoints
+   16. Floating WhatsApp Button & 9-Option Inquiry Modal
+   -------------------------------------------------------------------------- */
+.floating-wa-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: var(--z-sticky);
+  background: #25D366;
+  color: #FFFFFF;
+  border-radius: var(--radius-full);
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: all var(--transition-smooth);
+  border: 2px solid #FFFFFF;
+}
+
+.floating-wa-btn:hover {
+  background: #20BA5A;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+}
+
+.floating-wa-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: var(--radius-full);
+  border: 2px solid #25D366;
+  opacity: 0.8;
+  animation: waPulse 2s infinite ease-out;
+  pointer-events: none;
+}
+
+@keyframes waPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+
+/* WhatsApp Inquiry Modal */
+.wa-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 21, 39, 0.92);
+  backdrop-filter: blur(14px);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-smooth);
+}
+
+.wa-modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.wa-modal-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-xl);
+  max-width: 860px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-sand-dark);
+  position: relative;
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.wa-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-charcoal-border);
+}
+
+.wa-modal-title {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  color: var(--color-navy);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.wa-modal-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-sand-light);
+  color: var(--color-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.wa-modal-close:hover {
+  background: var(--color-navy);
+  color: #FFFFFF;
+}
+
+.wa-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.15rem;
+}
+
+.wa-option-item {
+  background: #FAF8F5;
+  border: 1.5px solid var(--color-sand);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.15rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  text-align: left;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  color: var(--color-charcoal);
+  cursor: pointer;
+}
+
+.wa-option-item:hover {
+  background: #FFFFFF;
+  border-color: #25D366;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(37, 211, 102, 0.2);
+}
+
+.wa-option-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.wa-option-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wa-option-desc {
+  font-size: var(--text-xs);
+  color: var(--color-charcoal-muted);
+  line-height: 1.4;
+  margin-bottom: 0.45rem;
+}
+
+.wa-option-msg-snippet {
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--color-gold-dark);
+  background: rgba(201, 168, 106, 0.12);
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  word-break: break-word;
+}
+
+/* --------------------------------------------------------------------------
+   17. Micro-Interactions & Responsive Breakpoints
    -------------------------------------------------------------------------- */
 .fade-in-element {
   opacity: 0;
@@ -1978,7 +2137,6 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(0);
 }
 
-/* Responsive Media Queries */
 @media (max-width: 1024px) {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
@@ -1990,10 +2148,16 @@ h1, h2, h3, h4, h5, h6 {
   .contact-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .story-badge-floating {
-    right: 20px;
-    bottom: -15px;
+    position: relative;
+    bottom: 0;
+    right: 0;
+    margin-top: -30px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    width: fit-content;
   }
 }
 
@@ -2031,6 +2195,20 @@ h1, h2, h3, h4, h5, h6 {
   .footer-grid {
     grid-template-columns: 1fr;
   }
+
+  .floating-wa-btn span {
+    display: none;
+  }
+  
+  .floating-wa-btn {
+    padding: 0.85rem;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .wa-options-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2050,5 +2228,14 @@ h1, h2, h3, h4, h5, h6 {
   .gallery-item.featured {
     grid-column: auto;
     grid-row: auto;
+  }
+
+  .story-badge-floating {
+    min-width: 100%;
+    padding: 1rem 1.25rem;
+  }
+
+  .story-badge-year {
+    font-size: 1.25rem;
   }
 }
