@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://anchorcafechirala.in/</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://anchorcafechirala.in/assets/images/hero_coastal_cafe.jpg</image:loc>
+      <image:title>Anchor Cafe Coastal Terrace at Ramapuram Beach Chirala</image:title>
+      <image:caption>Sunset dining and specialty coffee deck overlooking Ramapuram Beach, Chirala</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://anchorcafechirala.in/assets/images/sunset_mojitos.jpg</image:loc>
+      <image:title>Signature Ramapuram Sunset Mojitos and Coastal Cold Brew</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://anchorcafechirala.in/assets/images/story_craft_coffee.jpg</image:loc>
+      <image:title>Artisanal Specialty Pour Over Coffee at Anchor Cafe</image:title>
+    </image:image>
+  </url>
+</urlset>

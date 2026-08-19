@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="anchorGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8DFC8"/>
+      <stop offset="50%" stop-color="#C9A86A"/>
+      <stop offset="100%" stop-color="#9A7B3E"/>
+    </linearGradient>
+    <linearGradient id="oceanNavy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B2545"/>
+      <stop offset="100%" stop-color="#061527"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#oceanNavy)"/>
+  <!-- Decorative Ring -->
+  <circle cx="32" cy="32" r="28" stroke="url(#anchorGold)" stroke-width="1.5" stroke-dasharray="3 3" fill="none" opacity="0.6"/>
+  <!-- Anchor / Coffee Fusion Motif -->
+  <!-- Top Ring -->
+  <circle cx="32" cy="14" r="5" stroke="url(#anchorGold)" stroke-width="2.5" fill="none"/>
+  <!-- Crossbar -->
+  <line x1="20" y1="23" x2="44" y2="23" stroke="url(#anchorGold)" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="20" cy="23" r="2" fill="url(#anchorGold)"/>
+  <circle cx="44" cy="23" r="2" fill="url(#anchorGold)"/>
+  <!-- Vertical Stem (Coffee Steam) -->
+  <path d="M32 19 L32 46" stroke="url(#anchorGold)" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Lower Flukes / Ocean Waves curve -->
+  <path d="M16 36 C16 48, 48 48, 48 36" stroke="url(#anchorGold)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <polygon points="16,33 13,38 19,38" fill="url(#anchorGold)"/>
+  <polygon points="48,33 45,38 51,38" fill="url(#anchorGold)"/>
+  <!-- Mini Coffee Bean Accent at center -->
+  <path d="M32 29 C34 29, 35 31, 35 33 C35 35, 34 37, 32 37 C30 37, 29 35, 29 33 C29 31, 30 29, 32 29 Z" fill="#C9A86A"/>
+  <path d="M32 30 Q30 33, 32 36" stroke="#0B2545" stroke-width="0.8" fill="none"/>
+</svg>
