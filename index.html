@@ -37,7 +37,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3.2">
 
   <!-- Schema.org JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -69,9 +69,10 @@
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 15.8284,
-      "longitude": 80.3645
+      "latitude": 15.7791544,
+      "longitude": 80.3866496
     },
+    "hasMap": "https://maps.app.goo.gl/bQYKfdwXcb5BwEg18",
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
@@ -169,7 +170,7 @@
     </div>
     <div style="display: flex; flex-direction: column; gap: 0.75rem;">
       <button class="btn btn-whatsapp wa-modal-trigger">WhatsApp 8008370274</button>
-      <a href="#location" class="btn btn-gold">Get Directions</a>
+      <a href="https://maps.app.goo.gl/bQYKfdwXcb5BwEg18" target="_blank" rel="noopener" class="btn btn-gold">Get Directions</a>
     </div>
   </aside>
 
@@ -206,7 +207,7 @@
             <span>Explore Menu</span>
             <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
-          <a href="#location" class="btn btn-outline-light">
+          <a href="https://maps.app.goo.gl/bQYKfdwXcb5BwEg18" target="_blank" rel="noopener" class="btn btn-outline-light">
             <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
             <span>Get Directions</span>
           </a>
@@ -301,11 +302,49 @@
     <section class="section-padding menu-section" id="menu" aria-label="Interactive Food and Drink Menu">
       <div class="container">
         <div class="section-header fade-in-element">
-          <span class="eyebrow">Curated Offerings</span>
-          <h2 class="section-title">The Coastal Kitchen & Bar</h2>
+          <span class="eyebrow">Anchor Cafe • Ramapuram Beach</span>
+          <h2 class="section-title">Authentic Food &amp; Beverage Menu</h2>
           <p class="section-subtitle">
-            Specialty espresso brews, handcrafted beach mojitos, gourmet milkshakes, artisanal ice creams, and savory beachside snacks.
+            Specialty filter coffee, teas, handcrafted beach mojitos, 27 signature thick shake flavours, artisanal ice creams, and crispy savory snacks.
           </p>
+          <div style="display: inline-block; margin-top: 0.5rem; padding: 0.35rem 0.85rem; background: rgba(201, 168, 106, 0.15); border-radius: 999px; font-size: 0.82rem; color: var(--color-gold-dark); font-weight: 700;">
+            ✨ "Taste the Best, Feel the Difference"
+          </div>
+        </div>
+
+        <!-- Authentic Printed Menu Cards Showcase -->
+        <div class="printed-menu-showcase fade-in-element">
+          <div class="printed-menu-showcase-header">
+            <h3 class="printed-menu-showcase-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              <span>Authentic Printed Menu Cards (4 Pages)</span>
+            </h3>
+            <p style="font-size: 0.85rem; color: var(--color-charcoal-muted); margin-top: 0.25rem;">
+              Click any card below to view the official printed menu as served at Anchor Cafe.
+            </p>
+          </div>
+          <div class="printed-menu-cards-grid">
+            <div class="printed-menu-card-tile printed-card-trigger" data-img="assets/images/card_hot_beverages.jpg" data-title="Page 1: Hot Beverages Menu Card">
+              <img src="assets/images/card_hot_beverages.jpg" alt="Hot Beverages Menu Card" loading="lazy">
+              <span>☕ Hot Beverages</span>
+              <small>Filter Coffee &amp; Teas (From ₹30)</small>
+            </div>
+            <div class="printed-menu-card-tile printed-card-trigger" data-img="assets/images/card_thick_shakes.png" data-title="Page 2: Premium & Signature Thick Shakes">
+              <img src="assets/images/card_thick_shakes.png" alt="Thick Shakes Menu Card" loading="lazy">
+              <span>🥤 Thick Shakes</span>
+              <small>27 Signature Flavours (From ₹80)</small>
+            </div>
+            <div class="printed-menu-card-tile printed-card-trigger" data-img="assets/images/card_mojitos_icecreams.png" data-title="Page 3: Mojitos & Ice Creams">
+              <img src="assets/images/card_mojitos_icecreams.png" alt="Mojitos & Ice Creams Menu Card" loading="lazy">
+              <span>🍹 Mojitos &amp; 🍨 Ice Creams</span>
+              <small>13 Mojitos &amp; 9 Ice Creams</small>
+            </div>
+            <div class="printed-menu-card-tile printed-card-trigger" data-img="assets/images/card_snacks.jpg" data-title="Page 4: Snacks & Quick Bites">
+              <img src="assets/images/card_snacks.jpg" alt="Snacks & Quick Bites Menu Card" loading="lazy">
+              <span>🍟 Snacks &amp; Bites</span>
+              <small>Veg &amp; Chicken Specials (From ₹70)</small>
+            </div>
+          </div>
         </div>
 
         <div class="menu-controls fade-in-element">
@@ -315,7 +354,7 @@
             <input type="text" 
                    id="menuSearchInput" 
                    class="menu-search-input" 
-                   placeholder="Search coffee, mojito, milkshake, ice cream, snacks..." 
+                   placeholder="Search coffee, mojito, shake, fries, momos, wings..." 
                    aria-label="Search the menu">
             <svg class="menu-search-clear" id="menuSearchClear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-label="Clear search"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </div>
@@ -323,19 +362,19 @@
           <!-- Category Filter Tabs -->
           <div class="menu-category-tabs" role="tablist" aria-label="Menu categories">
             <button class="category-tab-btn active" data-category="all" role="tab" aria-selected="true">All Offerings</button>
-            <button class="category-tab-btn" data-category="brews" role="tab" aria-selected="false">Espresso & Cold Brews</button>
-            <button class="category-tab-btn" data-category="mojitos" role="tab" aria-selected="false">Coastal Mojitos</button>
-            <button class="category-tab-btn" data-category="shakes" role="tab" aria-selected="false">Milkshakes & Frappes</button>
-            <button class="category-tab-btn" data-category="icecream" role="tab" aria-selected="false">Gourmet Ice Creams</button>
-            <button class="category-tab-btn" data-category="snacks" role="tab" aria-selected="false">Savory Snacks</button>
+            <button class="category-tab-btn" data-category="hot-beverages" role="tab" aria-selected="false">☕ Hot Beverages</button>
+            <button class="category-tab-btn" data-category="mojitos" role="tab" aria-selected="false">🍹 Mojitos</button>
+            <button class="category-tab-btn" data-category="shakes" role="tab" aria-selected="false">🥤 Thick Shakes</button>
+            <button class="category-tab-btn" data-category="icecream" role="tab" aria-selected="false">🍨 Ice Creams</button>
+            <button class="category-tab-btn" data-category="snacks" role="tab" aria-selected="false">🍟 Snacks &amp; Bites</button>
           </div>
 
           <!-- Dietary Toggle Pills -->
           <div class="dietary-filter-bar" aria-label="Filter by dietary preference">
-            <button class="dietary-tag-btn active" data-tag="all">All Preferences</button>
+            <button class="dietary-tag-btn active" data-tag="all">All Items</button>
             <button class="dietary-tag-btn" data-tag="Veg">🌱 Vegetarian</button>
-            <button class="dietary-tag-btn" data-tag="Vegan">🍃 100% Plant Based</button>
-            <button class="dietary-tag-btn" data-tag="Chef Special">⭐ Chef's Signature</button>
+            <button class="dietary-tag-btn" data-tag="Non-Veg">🍗 Non-Veg</button>
+            <button class="dietary-tag-btn" data-tag="Signature">⭐ Bestsellers</button>
           </div>
         </div>
 
@@ -425,14 +464,24 @@
           <!-- Populated by script.js -->
         </div>
 
-        <div style="text-align: center; margin-top: 2.5rem;" class="fade-in-element">
-          <a href="https://maps.google.com/?q=Ramapuram+Beach+Chirala" 
+        <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 2.5rem;" class="fade-in-element">
+          <a href="https://maps.app.goo.gl/bQYKfdwXcb5BwEg18" 
+             id="gmapsViewPhotosBtn"
              target="_blank" 
              rel="noopener" 
              class="btn btn-outline" 
-             style="margin-right: 0.75rem;">
+             aria-label="View all photos on Google Maps">
             <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
             <span>View 400+ Photos on Google Maps</span>
+          </a>
+          <a href="https://maps.app.goo.gl/bQYKfdwXcb5BwEg18" 
+             id="gmapsUploadPhotoBtn"
+             target="_blank" 
+             rel="noopener" 
+             class="btn btn-primary" 
+             aria-label="Upload photo to Google Maps">
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            <span>Upload Photo to Google Maps</span>
           </a>
           <a href="https://wa.me/916303301334?text=%F0%9F%8C%8A%20Hey%20Anchor%20Cafe!%20I'd%20love%20to%20share%20my%20photo%20taken%20at%20Anchor%20Cafe%20(Ramapuram%20Beach,%20Chirala)%20to%20be%20featured%20on%20your%20gallery!%20%F0%9F%93%B8%E2%9C%A8" 
              target="_blank" 
@@ -440,7 +489,7 @@
              class="btn btn-gold" 
              aria-label="Share your photo directly on WhatsApp 6303301334">
             <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            <span>Share Your Photo on WhatsApp</span>
+            <span>Share Photo on WhatsApp</span>
           </a>
         </div>
       </div>
@@ -472,6 +521,42 @@
           <p class="section-subtitle">
             Hear from travelers, families, and coffee lovers who visited Anchor Cafe at Ramapuram Beach.
           </p>
+        <!-- Google Maps Verified Rating Card -->
+        <div class="gmaps-rating-badge fade-in-element" style="max-width: 680px; margin: 0 auto 2.5rem; background: #FFFFFF; border: 1.5px solid var(--color-sand); border-radius: var(--radius-lg); padding: 1.25rem 1.75rem; box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <svg width="36" height="36" viewBox="0 0 48 48" aria-hidden="true">
+              <path fill="#4285F4" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+              <path fill="#34A853" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+              <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+              <path fill="#EA4335" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+            </svg>
+            <div>
+              <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                <strong style="font-size: 1.1rem; color: var(--color-navy);">Anchor Cafe on Google Maps</strong>
+                <span style="background: rgba(37, 211, 102, 0.15); color: #1b8529; font-size: 0.72rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: var(--radius-sm);">✓ Verified Profile</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.4rem; margin-top: 0.25rem;">
+                <span style="color: #F5A623; font-weight: 800; font-size: 0.95rem;">5.0 ★★★★★</span>
+                <span style="font-size: 0.78rem; color: var(--color-charcoal-muted);">(Real &amp; Verified Reviews on Google)</span>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <a href="https://maps.app.goo.gl/bQYKfdwXcb5BwEg18" 
+               target="_blank" 
+               rel="noopener" 
+               class="btn btn-outline" 
+               style="padding: 0.45rem 0.9rem; font-size: 0.78rem;">
+              <span>Write a Review</span>
+            </a>
+            <a href="https://maps.app.goo.gl/bQYKfdwXcb5BwEg18" 
+               target="_blank" 
+               rel="noopener" 
+               class="btn btn-primary" 
+               style="padding: 0.45rem 0.9rem; font-size: 0.78rem;">
+              <span>Read on Google Maps</span>
+            </a>
+          </div>
         </div>
 
         <div class="reviews-carousel-wrapper fade-in-element">
@@ -501,7 +586,7 @@
           <span class="eyebrow">Connect & Tag</span>
           <h2 class="section-title">Follow the Shoreline</h2>
           <p class="section-subtitle">
-            Tag <a href="https://instagram.com" target="_blank" rel="noopener" style="color: var(--color-gold-dark); font-weight: 600;">@AnchorCafeChirala</a> and use #AnchorCafeChirala to be featured.
+            Tag <a href="https://instagram.com/anchor_cafe" target="_blank" rel="noopener" style="color: var(--color-gold-dark); font-weight: 600;">@ANCHOR_CAFE</a> and use #AnchorCafeChirala to be featured.
           </p>
         </div>
 
@@ -545,9 +630,9 @@
         </div>
 
         <div class="insta-cta-wrap">
-          <a href="https://instagram.com" target="_blank" rel="noopener" class="btn btn-outline">
+          <a href="https://instagram.com/anchor_cafe" target="_blank" rel="noopener" class="btn btn-outline">
             <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            <span>Follow Us on Instagram</span>
+            <span>Follow @ANCHOR_CAFE on Instagram</span>
           </a>
         </div>
       </div>
@@ -568,7 +653,7 @@
           <div class="map-embed-card fade-in-element">
             <iframe class="map-embed-iframe" 
                     title="Anchor Cafe Location at Ramapuram Beach, Chirala"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15344.887201736636!2d80.3541785!3d15.8283832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4a3500d04c10c1%3A0xb351307bdfa67b5e!2sRamapuram%20Beach!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3836.43825838421!2d80.3840747!3d15.7791595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4a47ca7c15e715%3A0xb96388332838b5c9!2sAnchor%20cafe!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
                     loading="lazy" 
                     referrerpolicy="no-referrer-when-downgrade">
             </iframe>
@@ -612,7 +697,7 @@
             </div>
 
             <div>
-              <a href="https://maps.google.com/?q=Ramapuram+Beach+Chirala" 
+              <a href="https://maps.app.goo.gl/bQYKfdwXcb5BwEg18" 
                  target="_blank" 
                  rel="noopener" 
                  class="btn btn-primary" 
@@ -746,7 +831,7 @@
             <button class="footer-social-btn wa-modal-trigger" aria-label="Anchor Cafe WhatsApp 8008370274">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
             </button>
-            <a href="https://maps.google.com/?q=Ramapuram+Beach+Chirala" class="footer-social-btn" aria-label="Anchor Cafe Google Maps" target="_blank" rel="noopener">
+            <a href="https://maps.app.goo.gl/bQYKfdwXcb5BwEg18" class="footer-social-btn" aria-label="Anchor Cafe Google Maps" target="_blank" rel="noopener">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
             </a>
           </div>
@@ -827,7 +912,7 @@
     </div>
   </div>
 
-  <!-- Core Script -->
-  <script src="script.js"></script>
+  <!-- Core Script with Cache Busting -->
+  <script src="script.js?v=3.2"></script>
 </body>
 </html>

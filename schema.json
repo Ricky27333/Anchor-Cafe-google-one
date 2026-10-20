@@ -13,6 +13,7 @@
         "https://anchorcafechirala.in/assets/images/milkshakes_icecreams.jpg"
       ],
       "url": "https://anchorcafechirala.in",
+      "hasMap": "https://maps.app.goo.gl/bQYKfdwXcb5BwEg18",
       "telephone": "+918008370274",
       "priceRange": "₹₹",
       "servesCuisine": [
@@ -33,8 +34,8 @@
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 15.8284,
-        "longitude": 80.3645
+        "latitude": 15.7791544,
+        "longitude": 80.3866496
       },
       "openingHoursSpecification": [
         {
