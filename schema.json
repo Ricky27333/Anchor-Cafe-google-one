@@ -1,0 +1,74 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CafeOrCoffeeShop",
+      "@id": "https://anchorcafechirala.in/#cafe",
+      "name": "Anchor Cafe",
+      "alternateName": "Anchor Beachfront Cafe & Roasters (Choramandal)",
+      "image": [
+        "https://anchorcafechirala.in/assets/images/anchor_cafe_logo.jpg",
+        "https://anchorcafechirala.in/assets/images/hero_coastal_cafe.jpg",
+        "https://anchorcafechirala.in/assets/images/sunset_mojitos.jpg",
+        "https://anchorcafechirala.in/assets/images/milkshakes_icecreams.jpg"
+      ],
+      "url": "https://anchorcafechirala.in",
+      "hasMap": "https://maps.app.goo.gl/bQYKfdwXcb5BwEg18",
+      "telephone": "+918008370274",
+      "priceRange": "₹₹",
+      "servesCuisine": [
+        "Specialty Coffee",
+        "Handcrafted Mojitos & Coolers",
+        "Gourmet Milkshakes",
+        "Artisanal Ice Creams",
+        "Beachside Savory Snacks",
+        "Choramandal Coastal Brunch"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Ramapuram Beach Road, Promenade",
+        "addressLocality": "Chirala",
+        "addressRegion": "Andhra Pradesh",
+        "postalCode": "523157",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 15.7791544,
+        "longitude": 80.3866496
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "05:00",
+          "closes": "22:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "05:00",
+          "closes": "23:30"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "480",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "hasMenu": "https://anchorcafechirala.in/#menu",
+      "acceptsReservations": "True"
+    }
+  ]
+}
