@@ -51,10 +51,10 @@ const WHATSAPP_INQUIRY_OPTIONS = [
   },
   {
     id: 4,
-    title: "4️⃣ Couple's Sunset Plan ❤️",
-    icon: '❤️',
-    desc: 'Evening sunset date combo for two',
-    text: "🌅 We're planning a beach date this evening. Could you recommend the perfect combo for two? ☕🍹"
+    title: "4️⃣ Night Beach Table & Dining 🌙",
+    icon: '🌙',
+    desc: 'Candlelight dining on the sand & couple date setup',
+    text: "🌙 We'd love to reserve a Night-Time Beach Table (Candlelight Dining) on the Ramapuram sand! Please share available evening slots and dinner combos. ✨"
   },
   {
     id: 5,
@@ -72,10 +72,10 @@ const WHATSAPP_INQUIRY_OPTIONS = [
   },
   {
     id: 7,
-    title: '7️⃣ Birthday Celebration 🎉',
+    title: '7️⃣ Birthday Beach Events & Lightings 🎉',
     icon: '🎉',
-    desc: 'Decorations, combos & party setup',
-    text: "🎂 We're planning a birthday celebration at Anchor Cafe! Do you have decorations, special combos, or surprise arrangements? 🎈"
+    desc: 'Fairy light canopy, neon marquee & cake party setup',
+    text: "🎂 We're planning a Birthday Celebration with Beach Lightings near the water! Please share details on fairy light canopies, neon signage, and party packages. 🎈✨"
   },
   {
     id: 8,
@@ -86,10 +86,10 @@ const WHATSAPP_INQUIRY_OPTIONS = [
   },
   {
     id: 9,
-    title: '9️⃣ Events & Beach Nights 🔥',
+    title: '9️⃣ Beach Campfire & Sports (Cricket / Volleyball) 🔥',
     icon: '🔥',
-    desc: 'DJ nights, campfire, live music & weekend specials',
-    text: "🎶 We're interested in your special events! Do you have DJ Nights, Campfire Nights, Live Music, Beach Events, or Weekend Specials happening? Tell us what's coming up! 🔥🌊"
+    desc: 'Bonfire pit, beach volleyball court & cricket kit rental',
+    text: "🔥 Hey Anchor Cafe! We're interested in booking a Beach Campfire or Beach Sports (Cricket / Volleyball) at Ramapuram Beach! Tell us what's available and pricing! 🌊🏏🏐"
   }
 ];
 
