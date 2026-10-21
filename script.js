@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initWhatsAppModal();
   initScrollReveal();
+  initBeachExperienceBuilder();
 });
 
 const WHATSAPP_NUMBER = '917702897213';
@@ -1574,3 +1575,148 @@ function initScrollReveal() {
 
   elements.forEach(el => observer.observe(el));
 }
+
+/* ==========================================================================
+   12. Interactive Beach Experience Builder & Live WhatsApp Quote Engine
+   ========================================================================== */
+function initBeachExperienceBuilder() {
+  const dateInput = document.getElementById('builderDate');
+  if (dateInput && !dateInput.value) {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    dateInput.value = `${yyyy}-${mm}-${dd}`;
+  }
+
+  // Sync checkboxes with active/selected label styles
+  const allCheckboxes = document.querySelectorAll('.service-choice-checkbox, input[name="addons"]');
+  allCheckboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const parentLabel = cb.closest('label');
+      if (parentLabel) {
+        if (cb.checked) {
+          parentLabel.classList.add('selected');
+        } else {
+          parentLabel.classList.remove('selected');
+        }
+      }
+      updateWhatsAppMessage();
+    });
+  });
+
+  updateWhatsAppMessage();
+}
+
+function toggleBeachCustomizer() {
+  const container = document.getElementById('beachCustomizerContainer');
+  const label = document.getElementById('customizerToggleLabel');
+  if (!container) return;
+
+  const isHidden = container.style.display === 'none' || container.style.display === '';
+  if (isHidden) {
+    container.style.display = 'block';
+    if (label) label.textContent = '▲ Hide Experience Customizer';
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    updateWhatsAppMessage();
+  } else {
+    container.style.display = 'none';
+    if (label) label.textContent = '⚙️ Customize Event, Timing & Hours';
+  }
+}
+
+function openAndScrollToBuilder(serviceId) {
+  const container = document.getElementById('beachCustomizerContainer');
+  const label = document.getElementById('customizerToggleLabel');
+  if (container) {
+    container.style.display = 'block';
+    if (label) label.textContent = '▲ Hide Experience Customizer';
+  }
+  selectServiceInBuilder(serviceId);
+  container?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function selectServiceInBuilder(serviceId) {
+  const map = {
+    'campfire': 'label-campfire',
+    'night-tables': 'label-night-tables',
+    'beach-sports': 'label-beach-sports',
+    'birthday-lighting': 'label-birthday-lighting'
+  };
+
+  const targetId = map[serviceId];
+  if (targetId) {
+    const label = document.getElementById(targetId);
+    const cb = label?.querySelector('input[type="checkbox"]');
+    if (cb) {
+      cb.checked = true;
+      label.classList.add('selected');
+      updateWhatsAppMessage();
+    }
+  }
+}
+
+function toggleCustomTime() {
+  const select = document.getElementById('builderStartTime');
+  const customInput = document.getElementById('builderCustomTime');
+  if (select && customInput) {
+    if (select.value === 'custom') {
+      customInput.style.display = 'block';
+      customInput.focus();
+    } else {
+      customInput.style.display = 'none';
+    }
+  }
+}
+
+function updateWhatsAppMessage() {
+  const selectedServices = Array.from(document.querySelectorAll('input[name="services"]:checked'))
+                                .map(el => el.value);
+  const selectedAddons = Array.from(document.querySelectorAll('input[name="addons"]:checked'))
+                              .map(el => el.value);
+  const date = document.getElementById('builderDate')?.value || 'Upcoming Date';
+
+  const timeSelect = document.getElementById('builderStartTime');
+  let startTime = timeSelect?.value || '7:00 PM (Candlelight Dinner)';
+  if (startTime === 'custom') {
+    const customVal = document.getElementById('builderCustomTime')?.value.trim();
+    startTime = customVal ? `${customVal} (Custom Specific Time)` : 'Custom Specific Time';
+  }
+
+  const totalHours = document.getElementById('builderHours')?.value || '2 Hours of Service (Recommended ⭐)';
+  const guests = document.getElementById('builderGuests')?.value || '3–5 Guests';
+  const name = document.getElementById('builderName')?.value.trim() || 'Guest';
+  const note = document.getElementById('builderNote')?.value.trim() || '';
+
+  const servicesText = selectedServices.length > 0 ? selectedServices.join(', ') : 'Beach Experience';
+  const addonsText = selectedAddons.length > 0 ? selectedAddons.join(', ') : 'None / Standard';
+
+  let message = `🌊 *Anchor Cafe Beach Experience Inquiry*\n`;
+  message += `------------------------------------\n`;
+  message += `👤 *Guest Name:* ${name}\n`;
+  message += `🎯 *Service(s) Requested:* ${servicesText}\n`;
+  message += `📅 *Date:* ${date}\n`;
+  message += `⏰ *Preferred Start Time:* ${startTime}\n`;
+  message += `⏳ *Total Service Duration:* ${totalHours}\n`;
+  message += `👥 *Number of Guests:* ${guests}\n`;
+  message += `☕ *Cafe Add-ons:* ${addonsText}\n`;
+  if (note) {
+    message += `📝 *Special Requests:* ${note}\n`;
+  }
+  message += `------------------------------------\n`;
+  message += `✨ Please confirm slot availability & pricing for Ramapuram Beach. Thank you!`;
+
+  const previewBox = document.getElementById('waMessagePreview');
+  if (previewBox) {
+    previewBox.innerText = message;
+  }
+
+  window.generatedWhatsAppMessage = message;
+}
+
+function triggerWhatsAppSend() {
+  const msg = window.generatedWhatsAppMessage || "Hi Anchor Cafe! I'd like to book a Beach Experience.";
+  const encoded = encodeURIComponent(msg);
+  window.open(`https://wa.me/917702897213?text=${encoded}`, '_blank');
+}
+
