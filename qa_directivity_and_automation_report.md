@@ -51,7 +51,7 @@ graph TD
 * **Criterion**:
   * **Phone links (`tel:`)**: Must follow the international E.164 standard (`tel:+917702897213`) so modern mobile dialers can initiate instant one-tap calling without formatting errors.
   * **WhatsApp API (`https://wa.me/`)**: Must target the sanitized phone format (`917702897213` without `+` or spaces) and pass URI-component-encoded query parameters (`?text=...`).
-  * **Google Maps**: Must point to verified coordinate/place shortlinks (`https://maps.app.goo.gl/...`) that seamlessly open Google Maps Native App on mobile or Web Maps on desktop.
+  * **Google Maps**: Must point to verified canonical Google Maps place URLs (`https://www.google.com/maps/place/Anchor+cafe/@15.7791544,80.3866496...`) rather than deprecated shortlinks (`maps.app.goo.gl`) to avoid ISP connection timeouts and guaranteed universal native app opening.
 
 ### Parameter 4: Viewport & Sticky Header Offset
 * **Criterion**: When jumping to a targeted section, the sticky header (height 80px) must never cover or cut off the section heading or action buttons.
@@ -158,7 +158,7 @@ graph TD
 | **Mobile Drawer Item** | Click any link inside drawer | In-page section | Auto-closes drawer, unfreezes scroll, navigates | **PASSED** |
 | **Mobile Drawer Close** | `✕` button or overlay click | Closes Drawer | Immediately dismisses drawer, restores UI | **PASSED** |
 | **Direct Call Action** | "Call Host" buttons | `tel:+917702897213` | Direct telephony protocol trigger | **PASSED** |
-| **Google Maps** | "Get Directions" buttons| `https://maps.app.goo.gl/...` | Opens Google Maps with coordinates | **PASSED** |
+| **Google Maps** | "Get Directions" buttons| `https://www.google.com/maps/place/...` | Opens Google Maps directly with place details & directions | **PASSED** |
 | **Table Inquiry Form** | Form Submit button | `https://wa.me/917702897213?text=...` | Synthesizes Name, Phone, Guests, Date into WhatsApp | **PASSED** |
 | **Custom Experience Builder**| "Review & Confirm WhatsApp" | `https://wa.me/917702897213?text=...` | Encodes exact hours, service, time into quote | **PASSED** |
 | **Legacy Redirection** | `experiences.html` | `services.html` | 0-second meta refresh redirect + fallback | **PASSED** |

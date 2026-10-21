@@ -3,7 +3,7 @@
  * Vanilla JavaScript Engine: Data Structures, Canvas Waves, Filters, Carousel, Lightbox & 9 Interactive WhatsApp Options
  * WhatsApp Primary: 7702897213 (917702897213)
  * WhatsApp Photo Sharing: 6303301334 (916303301334)
- * Google Maps: https://maps.app.goo.gl/bQYKfdwXcb5BwEg18
+ * Google Maps: https://www.google.com/maps/place/Anchor+cafe/@15.7791544,80.3866496,17z/data=!3m1!4b1!4m6!3m5!1s0x3a4a47ca7c15e715:0xb96388332838b5c9!8m2!3d15.7791544!4d80.3866496
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const WHATSAPP_NUMBER = '917702897213';
 const PHONE_NUMBER = '+917702897213';
 const DISPLAY_PHONE = '+91 77028 97213';
-const GMAPS_URL = 'https://maps.app.goo.gl/bQYKfdwXcb5BwEg18';
+const GMAPS_URL = 'https://www.google.com/maps/place/Anchor+cafe/@15.7791544,80.3866496,17z/data=!3m1!4b1!4m6!3m5!1s0x3a4a47ca7c15e715:0xb96388332838b5c9!8m2!3d15.7791544!4d80.3866496';
 
 /**
  * 9 Interactive WhatsApp Customer Inquiry Options
