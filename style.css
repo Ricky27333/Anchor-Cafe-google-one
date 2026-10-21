@@ -4110,3 +4110,647 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
 }
 
+/* ==========================================================================
+   20. Interactive Printed Menu Card Deck & Flipbook Viewer
+   ========================================================================== */
+.printed-menu-deck-card {
+  background: linear-gradient(145deg, #0B2545 0%, #07192F 100%);
+  border: 1.5px solid rgba(201, 168, 106, 0.45);
+  border-radius: var(--radius-xl);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  margin-bottom: 2.5rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.printed-menu-deck-card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(201, 168, 106, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.deck-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(201, 168, 106, 0.25);
+  padding-bottom: 1.25rem;
+}
+
+.deck-title-wrap {
+  flex: 1;
+  min-width: 260px;
+}
+
+.deck-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  color: #FFFFFF;
+  margin: 0 0 0.35rem;
+}
+
+.deck-sub {
+  font-size: 0.85rem;
+  color: var(--color-sand);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.deck-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.deck-tab {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(201, 168, 106, 0.3);
+  color: var(--color-sand);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.deck-tab:hover {
+  background: rgba(201, 168, 106, 0.2);
+  color: #FFFFFF;
+  border-color: var(--color-gold);
+}
+
+.deck-tab.active {
+  background: linear-gradient(135deg, #C9A86A 0%, #A88648 100%);
+  color: #0B2545;
+  font-weight: 700;
+  border-color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(201, 168, 106, 0.4);
+}
+
+.deck-display-frame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  min-height: 380px;
+}
+
+.deck-nav-btn {
+  background: rgba(11, 37, 69, 0.85);
+  border: 1.5px solid var(--color-gold);
+  color: var(--color-gold);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+  z-index: 2;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.deck-nav-btn:hover {
+  background: var(--color-gold);
+  color: var(--color-navy);
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(201, 168, 106, 0.5);
+}
+
+.deck-current-card-wrap {
+  position: relative;
+  max-width: 640px;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 2px solid rgba(201, 168, 106, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  background: #000000;
+  cursor: pointer;
+}
+
+.deck-card-image {
+  width: 100%;
+  height: auto;
+  max-height: 480px;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.deck-card-wrap:hover .deck-card-image {
+  transform: scale(1.02);
+}
+
+.deck-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(11, 37, 69, 0.9) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.deck-current-card-wrap:hover .deck-card-overlay {
+  opacity: 1;
+}
+
+.deck-zoom-btn {
+  font-size: 0.85rem;
+  padding: 0.55rem 1.15rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.deck-footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(201, 168, 106, 0.2);
+}
+
+.deck-page-indicator {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-sand);
+}
+
+.deck-mobile-zoom {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .deck-display-frame {
+    min-height: 280px;
+    gap: 0.4rem;
+  }
+  .deck-nav-btn {
+    width: 36px;
+    height: 36px;
+  }
+  .deck-card-image {
+    max-height: 360px;
+  }
+  .deck-mobile-zoom {
+    display: inline-flex;
+    font-size: 0.78rem;
+    padding: 0.45rem 0.8rem;
+  }
+}
+
+/* ==========================================================================
+   21. Budget Filter Pills
+   ========================================================================== */
+.budget-separator {
+  user-select: none;
+  font-weight: 300;
+}
+
+.budget-tag-btn {
+  background: rgba(11, 37, 69, 0.05);
+  border: 1px solid rgba(11, 37, 69, 0.2);
+  color: var(--color-charcoal);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.budget-tag-btn:hover {
+  background: rgba(201, 168, 106, 0.2);
+  border-color: var(--color-gold);
+  color: var(--color-navy);
+}
+
+.budget-tag-btn.active {
+  background: var(--color-navy);
+  border-color: var(--color-navy);
+  color: var(--color-gold-light);
+  box-shadow: 0 2px 8px rgba(11, 37, 69, 0.25);
+}
+
+/* ==========================================================================
+   22. Interactive Variation Pills on Menu Items
+   ========================================================================== */
+.item-tier-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.tier-pill-btn {
+  background: rgba(201, 168, 106, 0.12);
+  border: 1px solid rgba(201, 168, 106, 0.4);
+  color: #6E4909;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1.2;
+}
+
+.tier-pill-btn:hover {
+  background: rgba(201, 168, 106, 0.3);
+  color: #382402;
+  border-color: var(--color-gold);
+}
+
+.tier-pill-btn.active {
+  background: linear-gradient(135deg, #C9A86A 0%, #A88648 100%);
+  color: #0B2545;
+  border-color: #FFFFFF;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(201, 168, 106, 0.4);
+}
+
+/* ==========================================================================
+   23. Menu Row Interactive Actions & Quantity Steppers
+   ========================================================================== */
+.menu-compact-action-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.tray-add-btn {
+  background: rgba(201, 168, 106, 0.18);
+  border: 1.5px solid var(--color-gold);
+  color: #724E07;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.28rem 0.75rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tray-add-btn:hover {
+  background: var(--color-gold);
+  color: var(--color-navy);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(201, 168, 106, 0.4);
+}
+
+.tray-qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  background: #0B2545;
+  border: 1.5px solid var(--color-gold);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(11, 37, 69, 0.25);
+}
+
+.stepper-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-gold-light);
+  font-size: 0.95rem;
+  font-weight: 700;
+  width: 28px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.stepper-btn:hover {
+  background: rgba(201, 168, 106, 0.3);
+  color: #FFFFFF;
+}
+
+.stepper-count {
+  color: #FFFFFF;
+  font-size: 0.8rem;
+  font-weight: 700;
+  min-width: 22px;
+  text-align: center;
+  padding: 0 2px;
+}
+
+/* ==========================================================================
+   24. Floating Beach Order Tray Bar (Multi-Item Cart Summary)
+   ========================================================================== */
+.floating-beach-tray-bar {
+  position: fixed;
+  bottom: 82px; /* Sits nicely above mobile travel bottom bar on mobile */
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 680px;
+  background: rgba(11, 37, 69, 0.96);
+  backdrop-filter: blur(16px);
+  border: 1.5px solid var(--color-gold);
+  border-radius: var(--radius-full);
+  padding: 0.65rem 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: calc(var(--z-sticky) + 5);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+  animation: slideUpBar 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpBar {
+  from { transform: translate(-50%, 40px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+@media (min-width: 769px) {
+  .floating-beach-tray-bar {
+    bottom: 28px;
+    width: auto;
+    min-width: 500px;
+  }
+}
+
+.tray-bar-summary {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.tray-bar-badge {
+  background: var(--color-gold);
+  color: #0B2545;
+  font-size: 0.8rem;
+  font-weight: 800;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.tray-bar-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.tray-bar-text strong {
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  line-height: 1.2;
+}
+
+.tray-bar-text span {
+  color: var(--color-gold-light);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.tray-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tray-view-toggle-btn {
+  font-size: 0.78rem;
+  padding: 0.45rem 0.85rem;
+  border-color: rgba(201, 168, 106, 0.5);
+  color: var(--color-sand);
+}
+
+.tray-view-toggle-btn:hover {
+  background: rgba(201, 168, 106, 0.2);
+  color: #FFFFFF;
+}
+
+.tray-wa-checkout-btn {
+  font-size: 0.82rem;
+  padding: 0.45rem 1rem;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   25. Interactive Beach Tray Slide-up Modal / Drawer
+   ========================================================================== */
+.beach-tray-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 21, 39, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.beach-tray-modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (min-width: 769px) {
+  .beach-tray-modal-overlay {
+    align-items: center;
+    padding: 1.5rem;
+  }
+}
+
+.beach-tray-modal-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  max-width: 540px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-lg);
+  border: 1.5px solid var(--color-gold);
+  border-bottom: none;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+@media (min-width: 769px) {
+  .beach-tray-modal-card {
+    border-radius: var(--radius-xl);
+    border-bottom: 1.5px solid var(--color-gold);
+    transform: translateY(30px);
+  }
+}
+
+.beach-tray-modal-overlay.open .beach-tray-modal-card {
+  transform: translateY(0);
+}
+
+.beach-tray-header {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-sand);
+  background: var(--color-cream-tint);
+}
+
+.beach-tray-close-btn {
+  background: rgba(11, 37, 69, 0.08);
+  border: none;
+  color: var(--color-navy);
+  font-size: 1.5rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.beach-tray-close-btn:hover {
+  background: var(--color-navy);
+  color: #FFFFFF;
+}
+
+.beach-tray-items-list {
+  padding: 1.25rem 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-height: 140px;
+}
+
+.tray-empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--color-charcoal-muted);
+}
+
+.tray-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  padding: 0.75rem 0.95rem;
+  background: var(--color-sand-light);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(201, 168, 106, 0.25);
+}
+
+.tray-item-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.tray-item-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.tray-item-variant-pill {
+  font-size: 0.68rem;
+  background: rgba(201, 168, 106, 0.25);
+  color: #724E07;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 0.2rem;
+  font-weight: 600;
+}
+
+.tray-item-unit-price {
+  font-size: 0.75rem;
+  color: var(--color-charcoal-muted);
+  display: block;
+}
+
+.tray-item-stepper-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tray-item-subtotal {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-navy);
+  min-width: 50px;
+  text-align: right;
+}
+
+.tray-item-remove-btn {
+  background: none;
+  border: none;
+  color: #B33939;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.beach-tray-footer {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--color-sand);
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.beach-tray-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.beach-tray-total-amount {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--color-navy);
+}

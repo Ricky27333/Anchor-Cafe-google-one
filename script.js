@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initCanvasWaves();
   initHeaderScroll();
   initMobileNav();
+  initPrintedDeckCarousel();
+  initBeachTraySystem();
   initMenuSystem();
   initGalleryLightbox();
   initReviewsCarousel();
@@ -963,7 +965,401 @@ function initMobileNav() {
 }
 
 /* ==========================================================================
-   6. Interactive Menu System (Zero Duplicate Protection)
+   6. Interactive Printed Menu Card Deck & Flipbook Carousel
+   ========================================================================== */
+const PRINTED_DECK_PAGES = [
+  {
+    id: 0,
+    title: 'Hot Beverages Menu Card (Filter Coffee & Teas)',
+    badge: 'Page 1 of 4: Hot Beverages Menu Card (Filter Coffee & Teas)',
+    src: 'assets/images/card_hot_beverages.jpg',
+    alt: 'Hot Beverages Menu Card - Filter coffee and specialty teas at Anchor Cafe Ramapuram Beach',
+    waText: "☕ Hi Anchor Cafe! I'm looking at Page 1 (Hot Beverages) of your printed menu card. I'd like to order!"
+  },
+  {
+    id: 1,
+    title: '27 Signature Thick Shakes Menu Card (Milkshake, Blended, Thickshake)',
+    badge: 'Page 2 of 4: 27 Thick Shakes Menu Card (Milkshake, Blended, Thickshake)',
+    src: 'assets/images/card_thick_shakes.png',
+    alt: '27 Signature Thick Shakes Menu Card - Milkshake, Blended Shake, Thickshake at Anchor Cafe Ramapuram Beach',
+    waText: "🥤 Hi Anchor Cafe! I'm looking at Page 2 (27 Thick Shakes) of your printed menu card. I'd like to order!"
+  },
+  {
+    id: 2,
+    title: 'Mojitos & Artisanal Ice Creams Menu Card',
+    badge: 'Page 3 of 4: Handcrafted Mojitos & Gourmet Ice Creams Menu Card',
+    src: 'assets/images/card_mojitos_icecreams.png',
+    alt: 'Handcrafted Mojitos and Gourmet Ice Creams Menu Card at Anchor Cafe Ramapuram Beach',
+    waText: "🍹 Hi Anchor Cafe! I'm looking at Page 3 (Mojitos & Ice Creams) of your printed menu card. I'd like to order!"
+  },
+  {
+    id: 3,
+    title: 'Crispy Beach Bites & Savory Snacks Menu Card',
+    badge: 'Page 4 of 4: Crispy Beach Bites & Savory Snacks Menu Card',
+    src: 'assets/images/card_snacks.jpg',
+    alt: 'Crispy Beach Bites and Savory Snacks Menu Card at Anchor Cafe Ramapuram Beach',
+    waText: "🍟 Hi Anchor Cafe! I'm looking at Page 4 (Crispy Snacks) of your printed menu card. I'd like to order!"
+  }
+];
+
+let activeDeckPageIndex = 0;
+
+function updateDeckDisplay(index) {
+  if (index < 0) index = PRINTED_DECK_PAGES.length - 1;
+  if (index >= PRINTED_DECK_PAGES.length) index = 0;
+  activeDeckPageIndex = index;
+
+  const page = PRINTED_DECK_PAGES[activeDeckPageIndex];
+  const img = document.getElementById('deckActiveImg');
+  const indicator = document.getElementById('deckPageIndicator');
+  const waBtn = document.getElementById('deckWaBtn');
+  const tabs = document.querySelectorAll('.deck-tab');
+
+  if (img) {
+    img.style.opacity = '0.3';
+    setTimeout(() => {
+      img.src = page.src;
+      img.alt = page.alt;
+      img.style.opacity = '1';
+    }, 150);
+  }
+
+  if (indicator) {
+    indicator.textContent = page.badge;
+  }
+
+  if (waBtn) {
+    waBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(page.waText)}`;
+  }
+
+  tabs.forEach(tab => {
+    const tabIdx = parseInt(tab.getAttribute('data-page'), 10);
+    tab.classList.toggle('active', tabIdx === activeDeckPageIndex);
+  });
+}
+
+function initPrintedDeckCarousel() {
+  const prevBtn = document.getElementById('deckPrevBtn');
+  const nextBtn = document.getElementById('deckNextBtn');
+  const zoomBtn = document.getElementById('deckZoomBtn');
+  const cardWrap = document.getElementById('deckCardWrap');
+  const tabs = document.querySelectorAll('.deck-tab');
+
+  prevBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    updateDeckDisplay(activeDeckPageIndex - 1);
+  });
+
+  nextBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    updateDeckDisplay(activeDeckPageIndex + 1);
+  });
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const p = parseInt(tab.getAttribute('data-page'), 10);
+      updateDeckDisplay(p);
+    });
+  });
+
+  function triggerZoom() {
+    const page = PRINTED_DECK_PAGES[activeDeckPageIndex];
+    openMenuLightbox(page.src, page.title, 'Authentic Printed Card', 'High-resolution official printed cafe menu card photographed at Anchor Cafe, Ramapuram Beach, Chirala.');
+  }
+
+  zoomBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    triggerZoom();
+  });
+
+  cardWrap?.addEventListener('click', () => {
+    triggerZoom();
+  });
+
+  updateDeckDisplay(0);
+}
+
+/* ==========================================================================
+   7. Beach Order Tray System (Live Multi-Item Cart & WhatsApp Checkout)
+   ========================================================================== */
+window.beachTray = {
+  items: {}, // key: itemId or itemId_variant -> { id, key, title, variant, price, quantity }
+  notes: ''
+};
+
+const itemSelectedVariants = {};
+
+function getItemBasePrice(item) {
+  const match = item.price.match(/\d+/);
+  return match ? parseInt(match[0], 10) : 0;
+}
+
+function parseItemTiers(tierString) {
+  if (!tierString) return [];
+  return tierString.split('•').map(part => {
+    const trimmed = part.trim();
+    const priceMatch = trimmed.match(/₹\s*(\d+)/);
+    const price = priceMatch ? parseInt(priceMatch[1], 10) : 0;
+    const name = trimmed.replace(/₹\s*\d+/, '').trim();
+    let icon = '🥤';
+    if (name.toLowerCase().includes('milkshake')) icon = '🥛';
+    else if (name.toLowerCase().includes('blended')) icon = '🌪️';
+    return { name, price, icon };
+  });
+}
+
+window.selectItemVariant = function(itemId, variantName, variantPrice) {
+  itemSelectedVariants[itemId] = { variant: variantName, price: variantPrice };
+  const row = document.querySelector(`.menu-compact-row[data-item-id="${itemId}"]`);
+  if (row) {
+    row.querySelectorAll('.tier-pill-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-variant') === variantName);
+    });
+    const priceEl = row.querySelector('.menu-compact-price');
+    if (priceEl) priceEl.textContent = `₹${variantPrice}`;
+    const orderBtn = row.querySelector('.menu-compact-order-btn');
+    const item = MENU_DATA.find(m => m.id === itemId);
+    if (orderBtn && item) {
+      orderBtn.setAttribute('data-custom-text', `🌊 Hey Anchor Cafe! I'd like to order ${encodeURIComponent(item.title)} (${variantName} - ₹${variantPrice}) at Ramapuram Beach.`);
+    }
+  }
+};
+
+window.addToBeachTray = function(itemId) {
+  const item = MENU_DATA.find(m => m.id === itemId);
+  if (!item) return;
+
+  let variant = null;
+  let price = 0;
+
+  if (item.tierDetails) {
+    const selected = itemSelectedVariants[itemId];
+    if (selected) {
+      variant = selected.variant;
+      price = selected.price;
+    } else {
+      const tiers = parseItemTiers(item.tierDetails);
+      if (tiers.length > 0) {
+        variant = tiers[0].name;
+        price = tiers[0].price;
+      }
+    }
+  } else {
+    price = getItemBasePrice(item);
+  }
+
+  const trayKey = variant ? `${itemId}_${variant}` : itemId;
+
+  if (window.beachTray.items[trayKey]) {
+    window.beachTray.items[trayKey].quantity += 1;
+  } else {
+    window.beachTray.items[trayKey] = {
+      id: itemId,
+      key: trayKey,
+      title: item.title,
+      variant: variant,
+      price: price,
+      quantity: 1
+    };
+  }
+
+  renderBeachTrayUI();
+  updateMenuRowStepper(itemId);
+};
+
+window.incrementTray = function(trayKey) {
+  if (window.beachTray.items[trayKey]) {
+    window.beachTray.items[trayKey].quantity += 1;
+    renderBeachTrayUI();
+    const itemObj = window.beachTray.items[trayKey];
+    updateMenuRowStepper(itemObj.id);
+  }
+};
+
+window.decrementTray = function(trayKey) {
+  if (window.beachTray.items[trayKey]) {
+    const itemId = window.beachTray.items[trayKey].id;
+    window.beachTray.items[trayKey].quantity -= 1;
+    if (window.beachTray.items[trayKey].quantity <= 0) {
+      delete window.beachTray.items[trayKey];
+    }
+    renderBeachTrayUI();
+    updateMenuRowStepper(itemId);
+  }
+};
+
+window.removeFromTray = function(trayKey) {
+  if (window.beachTray.items[trayKey]) {
+    const itemId = window.beachTray.items[trayKey].id;
+    delete window.beachTray.items[trayKey];
+    renderBeachTrayUI();
+    updateMenuRowStepper(itemId);
+  }
+};
+
+window.clearBeachTray = function() {
+  window.beachTray.items = {};
+  renderBeachTrayUI();
+  document.querySelectorAll('.menu-compact-row').forEach(row => {
+    const itemId = row.getAttribute('data-item-id');
+    if (itemId) updateMenuRowStepper(itemId);
+  });
+};
+
+window.toggleBeachTrayModal = function(forceState) {
+  const modal = document.getElementById('beachTrayModal');
+  if (!modal) return;
+  const isOpen = forceState !== undefined ? forceState : !modal.classList.contains('open');
+  modal.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+};
+
+function getTrayCountForItem(itemId) {
+  let count = 0;
+  Object.values(window.beachTray.items).forEach(item => {
+    if (item.id === itemId) count += item.quantity;
+  });
+  return count;
+}
+
+function updateMenuRowStepper(itemId) {
+  const row = document.querySelector(`.menu-compact-row[data-item-id="${itemId}"]`);
+  if (!row) return;
+  const controlsWrap = row.querySelector('.item-tray-controls');
+  if (!controlsWrap) return;
+
+  const count = getTrayCountForItem(itemId);
+  if (count > 0) {
+    const matching = Object.values(window.beachTray.items).find(i => i.id === itemId);
+    const key = matching ? matching.key : itemId;
+    controlsWrap.innerHTML = `
+      <div class="tray-qty-stepper" data-item-id="${itemId}">
+        <button type="button" class="stepper-btn minus" onclick="decrementTray('${key}')" aria-label="Decrease quantity">−</button>
+        <span class="stepper-count">${count}</span>
+        <button type="button" class="stepper-btn plus" onclick="incrementTray('${key}')" aria-label="Increase quantity">+</button>
+      </div>
+    `;
+  } else {
+    controlsWrap.innerHTML = `
+      <button type="button" class="tray-add-btn" onclick="addToBeachTray('${itemId}')" aria-label="Add to tray">
+        <span class="plus-icon">+</span>
+        <span>Add</span>
+      </button>
+    `;
+  }
+}
+
+function renderBeachTrayUI() {
+  const trayBar = document.getElementById('floatingBeachTrayBar');
+  const badgeCount = document.getElementById('trayBadgeCount');
+  const summaryText = document.getElementById('trayBarPriceSummary');
+  const itemsList = document.getElementById('beachTrayItemsList');
+  const totalAmountEl = document.getElementById('beachTrayTotalAmount');
+
+  const items = Object.values(window.beachTray.items);
+  let totalItems = 0;
+  let grandTotal = 0;
+
+  items.forEach(it => {
+    totalItems += it.quantity;
+    grandTotal += (it.price * it.quantity);
+  });
+
+  if (trayBar) {
+    trayBar.style.display = totalItems > 0 ? 'flex' : 'none';
+  }
+
+  if (badgeCount) badgeCount.textContent = totalItems;
+  if (summaryText) summaryText.textContent = `₹${grandTotal} • ${totalItems} ${totalItems === 1 ? 'item' : 'items'} in tray`;
+  if (totalAmountEl) totalAmountEl.textContent = `₹${grandTotal}`;
+
+  if (itemsList) {
+    if (items.length === 0) {
+      itemsList.innerHTML = `
+        <div class="tray-empty-state">
+          <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🏖️☕</div>
+          <strong style="color: var(--color-navy); display: block; margin-bottom: 0.25rem;">Your Beach Tray is Empty</strong>
+          <p style="font-size: 0.82rem; margin: 0;">Tap "+ Add" on any menu item above to build your order for Ramapuram Beach delivery or takeaway!</p>
+        </div>
+      `;
+    } else {
+      itemsList.innerHTML = items.map(it => `
+        <div class="tray-item-row">
+          <div class="tray-item-meta">
+            <div class="tray-item-name">${it.title}</div>
+            ${it.variant ? `<span class="tray-item-variant-pill">${it.variant}</span>` : ''}
+            <span class="tray-item-unit-price">₹${it.price} each</span>
+          </div>
+          <div class="tray-item-stepper-wrap">
+            <div class="tray-qty-stepper">
+              <button type="button" class="stepper-btn minus" onclick="decrementTray('${it.key}')" aria-label="Decrease quantity">−</button>
+              <span class="stepper-count">${it.quantity}</span>
+              <button type="button" class="stepper-btn plus" onclick="incrementTray('${it.key}')" aria-label="Increase quantity">+</button>
+            </div>
+            <span class="tray-item-subtotal">₹${it.price * it.quantity}</span>
+            <button type="button" class="tray-item-remove-btn" onclick="removeFromTray('${it.key}')" aria-label="Remove item" title="Remove">&times;</button>
+          </div>
+        </div>
+      `).join('');
+    }
+  }
+}
+
+window.sendBeachTrayWhatsApp = function() {
+  const items = Object.values(window.beachTray.items);
+  if (items.length === 0) {
+    alert('Your Beach Order Tray is empty! Tap "+ Add" on items to add them to your tray first.');
+    return;
+  }
+
+  const notesInput = document.getElementById('beachTrayNotes');
+  const notes = notesInput ? notesInput.value.trim() : '';
+
+  let grandTotal = 0;
+  let itemsListText = '';
+
+  items.forEach(it => {
+    const subtotal = it.price * it.quantity;
+    grandTotal += subtotal;
+    const variantStr = it.variant ? ` (${it.variant})` : '';
+    itemsListText += `• ${it.quantity}x ${it.title}${variantStr} @ ₹${it.price} = ₹${subtotal}\n`;
+  });
+
+  let message = `🌊 *Anchor Cafe — Ramapuram Beach Order Tray*\n`;
+  message += `📍 *Shoreline Service / Takeaway Order*\n`;
+  message += `──────────────────\n`;
+  message += `${itemsListText}`;
+  message += `──────────────────\n`;
+  message += `*Total Estimate: ₹${grandTotal}*\n`;
+  if (notes) {
+    message += `📝 *Notes / Location:* ${notes}\n`;
+  }
+  message += `──────────────────\n`;
+  message += `Please confirm preparation and delivery! ☕🍟🥤✨`;
+
+  const encoded = encodeURIComponent(message);
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, '_blank');
+};
+
+function initBeachTraySystem() {
+  const modal = document.getElementById('beachTrayModal');
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      window.toggleBeachTrayModal(false);
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('open')) {
+      window.toggleBeachTrayModal(false);
+    }
+  });
+
+  renderBeachTrayUI();
+}
+
+/* ==========================================================================
+   8. Interactive Menu System (Zero Duplicate Protection & Budget Filters)
    ========================================================================== */
 function initMenuSystem() {
   const container = document.getElementById('menuCardsGrid');
@@ -973,9 +1369,11 @@ function initMenuSystem() {
   const clearBtn = document.getElementById('menuSearchClear');
   const categoryBtns = document.querySelectorAll('.category-tab-btn');
   const dietaryBtns = document.querySelectorAll('.dietary-tag-btn');
+  const budgetBtns = document.querySelectorAll('.budget-tag-btn');
 
   let currentCategory = 'all';
   let currentDietary = 'all';
+  let currentBudget = 'all';
   let searchQuery = '';
 
   const MENU_SECTIONS = [
@@ -1035,14 +1433,26 @@ function initMenuSystem() {
         item.title.toLowerCase().includes(searchQuery) || 
         item.description.toLowerCase().includes(searchQuery);
 
-      return matchesCategory && matchesDietary && matchesSearch;
+      let matchesBudget = true;
+      if (currentBudget !== 'all') {
+        const basePrice = getItemBasePrice(item);
+        if (currentBudget === 'under50') {
+          matchesBudget = basePrice <= 50;
+        } else if (currentBudget === 'under100') {
+          matchesBudget = basePrice <= 100;
+        } else if (currentBudget === '100plus') {
+          matchesBudget = basePrice >= 100;
+        }
+      }
+
+      return matchesCategory && matchesDietary && matchesSearch && matchesBudget;
     });
 
     if (filtered.length === 0) {
       container.innerHTML = `
         <div class="menu-no-results">
           <p style="font-size: 1.25rem; font-family: var(--font-heading); color: var(--color-navy); margin-bottom: 0.5rem;">No coastal delights found</p>
-          <p>Try searching for "mojito", "coffee", "thickshake", "ice cream", or reset your filters.</p>
+          <p>Try searching for "mojito", "coffee", "thickshake", "ice cream", or reset your budget and dietary filters.</p>
         </div>
       `;
       return;
@@ -1075,29 +1485,66 @@ function initMenuSystem() {
             </div>
           </div>
           <div class="menu-compact-list">
-            ${secItems.map(item => `
-              <div class="menu-compact-row" tabindex="0">
-                <div class="menu-compact-info">
-                  <div class="menu-compact-title-row">
-                    <span class="dietary-dot ${item.tags.includes('Non-Veg') ? 'nonveg' : 'veg'}" title="${item.tags.includes('Non-Veg') ? 'Non-Vegetarian' : 'Vegetarian'}"></span>
-                    <h4 class="menu-compact-title">${item.title}</h4>
-                    ${item.isSpecial ? '<span class="badge-tag badge-signature">⭐ Bestseller</span>' : ''}
+            ${secItems.map(item => {
+              const tiers = item.tierDetails ? parseItemTiers(item.tierDetails) : [];
+              const selectedVariant = itemSelectedVariants[item.id] || (tiers.length > 0 ? { variant: tiers[0].name, price: tiers[0].price } : null);
+              const displayPrice = selectedVariant ? `₹${selectedVariant.price}` : item.price;
+              const trayCount = getTrayCountForItem(item.id);
+
+              return `
+                <div class="menu-compact-row" data-item-id="${item.id}" tabindex="0">
+                  <div class="menu-compact-info">
+                    <div class="menu-compact-title-row">
+                      <span class="dietary-dot ${item.tags.includes('Non-Veg') ? 'nonveg' : 'veg'}" title="${item.tags.includes('Non-Veg') ? 'Non-Vegetarian' : 'Vegetarian'}"></span>
+                      <h4 class="menu-compact-title">${item.title}</h4>
+                      ${item.isSpecial ? '<span class="badge-tag badge-signature">⭐ Bestseller</span>' : ''}
+                    </div>
+                    <p class="menu-compact-desc">${item.description}</p>
+                    ${tiers.length > 0 ? `
+                      <div class="item-tier-selector" data-item-id="${item.id}">
+                        <span style="font-size: 0.72rem; color: #724E07; font-weight: 700; margin-right: 2px;">Variations:</span>
+                        ${tiers.map(t => `
+                          <button type="button" 
+                                  class="tier-pill-btn ${selectedVariant && selectedVariant.variant === t.name ? 'active' : ''}" 
+                                  data-variant="${t.name}" 
+                                  data-price="${t.price}" 
+                                  onclick="selectItemVariant('${item.id}', '${t.name}', ${t.price})"
+                                  aria-label="Select ${t.name} variation at ₹${t.price}">
+                            ${t.icon} ${t.name} ₹${t.price}
+                          </button>
+                        `).join('')}
+                      </div>
+                    ` : ''}
                   </div>
-                  <p class="menu-compact-desc">${item.description}</p>
-                  ${item.tierDetails ? `<div class="menu-compact-tiers"><strong>Variations:</strong> ${item.tierDetails}</div>` : ''}
+                  <div class="menu-compact-action">
+                    <span class="menu-compact-price">${displayPrice}</span>
+                    <div class="menu-compact-action-row">
+                      <div class="item-tray-controls" data-item-id="${item.id}">
+                        ${trayCount > 0 ? `
+                          <div class="tray-qty-stepper" data-item-id="${item.id}">
+                            <button type="button" class="stepper-btn minus" onclick="decrementTray('${selectedVariant ? item.id + '_' + selectedVariant.variant : item.id}')" aria-label="Decrease quantity">−</button>
+                            <span class="stepper-count">${trayCount}</span>
+                            <button type="button" class="stepper-btn plus" onclick="incrementTray('${selectedVariant ? item.id + '_' + selectedVariant.variant : item.id}')" aria-label="Increase quantity">+</button>
+                          </div>
+                        ` : `
+                          <button type="button" class="tray-add-btn" onclick="addToBeachTray('${item.id}')" aria-label="Add ${item.title} to Beach Order Tray">
+                            <span class="plus-icon">+</span>
+                            <span>Add</span>
+                          </button>
+                        `}
+                      </div>
+                      <button type="button" 
+                              class="menu-compact-order-btn wa-trigger-btn" 
+                              data-custom-text="🌊 Hey Anchor Cafe! I'd like to order ${encodeURIComponent(item.title)} (${selectedVariant ? selectedVariant.variant + ' - ₹' + selectedVariant.price : item.price}) at Ramapuram Beach." 
+                              aria-label="Order ${item.title} via WhatsApp">
+                         <span>WhatsApp</span>
+                         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div class="menu-compact-action">
-                  <span class="menu-compact-price">${item.price}</span>
-                  <button type="button" 
-                          class="menu-compact-order-btn wa-trigger-btn" 
-                          data-custom-text="🌊 Hey Anchor Cafe! I'd like to order ${encodeURIComponent(item.title)} (${item.price}${item.tierDetails ? ' - ' + encodeURIComponent(item.tierDetails) : ''}) at Ramapuram Beach." 
-                          aria-label="Order ${item.title} via WhatsApp">
-                     <span>Order</span>
-                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                  </button>
-                </div>
-              </div>
-            `).join('')}
+              `;
+            }).join('')}
           </div>
         </div>
       `;
@@ -1119,15 +1566,6 @@ function initMenuSystem() {
     });
   }
 
-  // Bind the 4 printed menu cards showcase triggers
-  document.querySelectorAll('.printed-card-trigger').forEach(card => {
-    card.addEventListener('click', () => {
-      const imgSrc = card.getAttribute('data-img');
-      const title = card.getAttribute('data-title');
-      openMenuLightbox(imgSrc, title, 'Anchor Cafe Official Menu Card', 'Authentic printed menu card photographed at Anchor Cafe, Ramapuram Beach, Chirala.');
-    });
-  });
-
   categoryBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       categoryBtns.forEach(b => b.classList.remove('active'));
@@ -1142,6 +1580,15 @@ function initMenuSystem() {
       dietaryBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       currentDietary = btn.getAttribute('data-tag');
+      renderMenu();
+    });
+  });
+
+  budgetBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      budgetBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentBudget = btn.getAttribute('data-budget');
       renderMenu();
     });
   });
