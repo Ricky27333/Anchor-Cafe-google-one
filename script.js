@@ -1,7 +1,7 @@
 /**
  * ANCHOR CAFE — RAMAPURAM BEACH, CHIRALA (CHORAMANDAL COAST)
  * Vanilla JavaScript Engine: Data Structures, Canvas Waves, Filters, Carousel, Lightbox & 9 Interactive WhatsApp Options
- * WhatsApp Primary: 8008370274 (918008370274)
+ * WhatsApp Primary: 7702897213 (917702897213)
  * WhatsApp Photo Sharing: 6303301334 (916303301334)
  * Google Maps: https://maps.app.goo.gl/bQYKfdwXcb5BwEg18
  */
@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
 });
 
-const WHATSAPP_NUMBER = '918008370274';
-const PHONE_NUMBER = '+918008370274';
-const DISPLAY_PHONE = '+91 80083 70274';
+const WHATSAPP_NUMBER = '917702897213';
+const PHONE_NUMBER = '+917702897213';
+const DISPLAY_PHONE = '+91 77028 97213';
 const GMAPS_URL = 'https://maps.app.goo.gl/bQYKfdwXcb5BwEg18';
 
 /**
@@ -1039,7 +1039,7 @@ function initMenuSystem() {
           <button type="button" 
                   class="menu-order-btn wa-trigger-btn" 
                   data-custom-text="🌊 Hey Anchor Cafe! I'd like to place an order for ${encodeURIComponent(item.title)} (${item.price}${item.tierDetails ? ' - ' + encodeURIComponent(item.tierDetails) : ''}). Please confirm availability! 😋✨" 
-                  aria-label="Order ${item.title} via WhatsApp 8008370274">
+                  aria-label="Order ${item.title} via WhatsApp 7702897213">
              <span>Order</span>
              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>

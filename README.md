@@ -57,6 +57,6 @@ Specialty Coffee • Handcrafted Mojitos • Gourmet Thick Shakes • Beach Snac
 ---
 
 ## 📱 Contact & Orders
-- **Primary Order WhatsApp**: [+91 80083 70274](https://wa.me/918008370274)
+- **Primary Order WhatsApp**: [+91 77028 97213](https://wa.me/917702897213)
 - **Photo Sharing WhatsApp**: [+91 63033 01334](https://wa.me/916303301334)
 - **Location**: Ramapuram Beach Promenade, Chirala, Andhra Pradesh 523157
