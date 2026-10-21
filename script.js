@@ -966,6 +966,8 @@ function initMobileNav() {
    ========================================================================== */
 function initMenuSystem() {
   const container = document.getElementById('menuCardsGrid');
+  if (!container) return;
+
   const searchInput = document.getElementById('menuSearchInput');
   const clearBtn = document.getElementById('menuSearchClear');
   const categoryBtns = document.querySelectorAll('.category-tab-btn');
