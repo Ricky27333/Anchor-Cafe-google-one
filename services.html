@@ -119,12 +119,15 @@
   <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
   <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile Navigation Menu">
     <div>
-      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem;">
-        <img src="assets/images/anchor_cafe_logo.jpg" alt="Anchor Cafe Logo" style="width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--color-gold);">
-        <div>
-          <span style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: #FFFFFF; display: block;">ANCHOR CAFE</span>
-          <span style="font-size: 0.65rem; color: var(--color-gold); letter-spacing: 0.1em; text-transform: uppercase;">BEACH EXPERIENCES &amp; SERVICES</span>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem;">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <img src="assets/images/anchor_cafe_logo.jpg" alt="Anchor Cafe Logo" style="width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--color-gold);">
+          <div>
+            <span style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; color: #FFFFFF; display: block;">ANCHOR CAFE</span>
+            <span style="font-size: 0.65rem; color: var(--color-gold); letter-spacing: 0.1em; text-transform: uppercase;">BEACH EXPERIENCES &amp; SERVICES</span>
+          </div>
         </div>
+        <button id="mobileDrawerClose" style="background: rgba(201,168,106,0.15); border: 1px solid var(--color-gold); color: var(--color-gold); width: 38px; height: 38px; border-radius: 50%; font-size: 1.3rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center;" aria-label="Close menu">&times;</button>
       </div>
       <nav class="mobile-nav-list">
         <a href="index.html" class="mobile-nav-link">← Back to Main Website</a>
@@ -144,21 +147,6 @@
       <a href="tel:+917702897213" class="btn btn-gold">Call Host Directly</a>
     </div>
   </aside>
-
-  <!-- Sticky Experience Sub-Navigation Bar -->
-  <div class="services-subnav-wrapper" aria-label="Beach Experiences Navigation">
-    <div class="container">
-      <div class="services-subnav">
-        <a href="#campfire" class="services-subnav-link">🔥 Beach Campfire</a>
-        <a href="#night-tables" class="services-subnav-link">🌙 Night Tables</a>
-        <a href="#beach-sports" class="services-subnav-link">🏏 Beach Cricket &amp; Volleyball</a>
-        <a href="#birthday-lighting" class="services-subnav-link">🎉 Birthday Lightings</a>
-        <a href="#booking-builder" class="services-subnav-link" style="background: var(--color-gold); color: var(--color-navy-deep); font-weight: 700;">
-          💬 Custom WhatsApp Builder
-        </a>
-      </div>
-    </div>
-  </div>
 
   <!-- Main Landmark -->
   <main id="main-content">
@@ -195,6 +183,21 @@
         </div>
       </div>
     </section>
+
+    <!-- Sticky Experience Sub-Navigation Bar -->
+    <div class="services-subnav-wrapper" aria-label="Beach Experiences Navigation">
+      <div class="container">
+        <div class="services-subnav">
+          <a href="#campfire" class="services-subnav-link">🔥 Beach Campfire</a>
+          <a href="#night-tables" class="services-subnav-link">🌙 Night Tables</a>
+          <a href="#beach-sports" class="services-subnav-link">🏏 Beach Cricket &amp; Volleyball</a>
+          <a href="#birthday-lighting" class="services-subnav-link">🎉 Birthday Lightings</a>
+          <a href="#booking-builder" class="services-subnav-link" style="background: var(--color-gold); color: var(--color-navy-deep); font-weight: 700;">
+            💬 Custom WhatsApp Builder
+          </a>
+        </div>
+      </div>
+    </div>
 
     <!-- 1b. Mobile Quick Single-Frame Explorer (Shows all 6 Beach Services at a glance for traveling customers) -->
     <section class="mobile-single-frame-services" id="quick-services-glance" aria-label="Quick Beach Services Overview">

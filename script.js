@@ -947,7 +947,10 @@ function initMobileNav() {
     document.body.style.overflow = isOpen ? 'hidden' : '';
   }
 
+  const closeBtn = document.getElementById('mobileDrawerClose');
+
   toggle?.addEventListener('click', () => toggleDrawer());
+  closeBtn?.addEventListener('click', () => toggleDrawer(false));
   overlay?.addEventListener('click', () => toggleDrawer(false));
   mobileLinks.forEach(link => link.addEventListener('click', () => toggleDrawer(false)));
 
