@@ -2998,6 +2998,21 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-sand);
 }
 
+/* Builder Timing Grid (Date, Start Time, Total Hours Needed) */
+.builder-timing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
+}
+
+@media (max-width: 768px) {
+  .builder-timing-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+}
+
 /* Add-on Chip Selectors */
 .addons-choice-grid {
   display: grid;
