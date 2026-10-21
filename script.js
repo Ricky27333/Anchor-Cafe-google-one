@@ -977,6 +977,44 @@ function initMenuSystem() {
   let currentDietary = 'all';
   let searchQuery = '';
 
+  const MENU_SECTIONS = [
+    {
+      id: 'hot-beverages',
+      icon: '☕',
+      title: 'Hot Beverages & Teas',
+      subtitle: 'Authentic South Indian filter coffee & hand-steeped teas',
+      startingPrice: 'From ₹30'
+    },
+    {
+      id: 'mojitos',
+      icon: '🍹',
+      title: 'Handcrafted Beach Mojitos & Coolers',
+      subtitle: 'Fresh muddled garden mint, key lime & sparkling tropical coolers',
+      startingPrice: 'From ₹100'
+    },
+    {
+      id: 'shakes',
+      icon: '🥤',
+      title: 'Premium Thick Shakes (27 Flavours)',
+      subtitle: 'Available in 3 variations: Milkshake • Blended Shake • Thickshake',
+      startingPrice: 'From ₹80'
+    },
+    {
+      id: 'icecream',
+      icon: '🍨',
+      title: 'Artisanal Ice Creams & Sundaes',
+      subtitle: 'Velvety gelato scoops, dry fruits & signature sundaes',
+      startingPrice: 'From ₹60'
+    },
+    {
+      id: 'snacks',
+      icon: '🍟',
+      title: 'Crispy Beach Bites & Savory Snacks',
+      subtitle: 'Golden fries, steamed & fried momos, chicken wings & samosas',
+      startingPrice: 'From ₹70'
+    }
+  ];
+
   function renderMenu() {
     if (!container) return;
 
@@ -1003,65 +1041,69 @@ function initMenuSystem() {
       container.innerHTML = `
         <div class="menu-no-results">
           <p style="font-size: 1.25rem; font-family: var(--font-heading); color: var(--color-navy); margin-bottom: 0.5rem;">No coastal delights found</p>
-          <p>Try searching for "mojito", "cold brew", "milkshake", "ice cream", or reset your filters.</p>
+          <p>Try searching for "mojito", "coffee", "thickshake", "ice cream", or reset your filters.</p>
         </div>
       `;
       return;
     }
 
-    container.innerHTML = filtered.map(item => `
-      <article class="menu-card" data-category="${item.category}" tabindex="0">
-        <div>
-          <div class="menu-card-img-wrap menu-img-trigger" 
-               data-img="${item.image}?v=3.2" 
-               data-title="${item.title}" 
-               data-price="${item.price}" 
-               data-desc="${item.description}"
-               role="button" 
-               aria-label="View large photo of ${item.title}">
-            <img src="${item.image}?v=3.2" alt="${item.title}" loading="lazy" class="menu-card-thumb" />
-            <div class="menu-img-zoom-icon" title="Click to view full photo">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+    // Determine which sections to render
+    const sectionsToRender = currentCategory === 'all' 
+      ? MENU_SECTIONS 
+      : MENU_SECTIONS.filter(s => s.id === currentCategory);
+
+    let html = '<div class="menu-sections-wrapper">';
+
+    sectionsToRender.forEach(sec => {
+      const secItems = filtered.filter(item => item.category === sec.id);
+      if (secItems.length === 0) return;
+
+      html += `
+        <div class="menu-category-section" id="sec-${sec.id}">
+          <div class="menu-section-header">
+            <div class="menu-section-header-title">
+              <span class="menu-cat-icon">${sec.icon}</span>
+              <div>
+                <h3 class="menu-cat-heading">${sec.title}</h3>
+                <p class="menu-cat-sub">${sec.subtitle}</p>
+              </div>
+            </div>
+            <div class="menu-cat-badges">
+              <span class="menu-cat-badge">${secItems.length} ${secItems.length === 1 ? 'Item' : 'Items'}</span>
+              <span class="menu-cat-badge" style="background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); color: #FFFFFF;">${sec.startingPrice}</span>
             </div>
           </div>
-          <div class="menu-card-header">
-            <h3 class="menu-item-title">${item.title}</h3>
-            <span class="menu-item-price">${item.price}</span>
+          <div class="menu-compact-list">
+            ${secItems.map(item => `
+              <div class="menu-compact-row" tabindex="0">
+                <div class="menu-compact-info">
+                  <div class="menu-compact-title-row">
+                    <span class="dietary-dot ${item.tags.includes('Non-Veg') ? 'nonveg' : 'veg'}" title="${item.tags.includes('Non-Veg') ? 'Non-Vegetarian' : 'Vegetarian'}"></span>
+                    <h4 class="menu-compact-title">${item.title}</h4>
+                    ${item.isSpecial ? '<span class="badge-tag badge-signature">⭐ Bestseller</span>' : ''}
+                  </div>
+                  <p class="menu-compact-desc">${item.description}</p>
+                  ${item.tierDetails ? `<div class="menu-compact-tiers"><strong>Variations:</strong> ${item.tierDetails}</div>` : ''}
+                </div>
+                <div class="menu-compact-action">
+                  <span class="menu-compact-price">${item.price}</span>
+                  <button type="button" 
+                          class="menu-compact-order-btn wa-trigger-btn" 
+                          data-custom-text="🌊 Hey Anchor Cafe! I'd like to order ${encodeURIComponent(item.title)} (${item.price}${item.tierDetails ? ' - ' + encodeURIComponent(item.tierDetails) : ''}) at Ramapuram Beach." 
+                          aria-label="Order ${item.title} via WhatsApp">
+                     <span>Order</span>
+                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </button>
+                </div>
+              </div>
+            `).join('')}
           </div>
-          ${item.tierDetails ? `<div class="menu-item-tiers">${item.tierDetails}</div>` : ''}
-          <p class="menu-item-desc">${item.description}</p>
         </div>
-        <div class="menu-card-footer">
-          <div class="menu-item-tags">
-            ${item.tags.map(t => {
-              let badgeClass = 'badge-special';
-              if (t === 'Veg') badgeClass = 'badge-veg';
-              else if (t === 'Non-Veg') badgeClass = 'badge-nonveg';
-              else if (t === 'Signature') badgeClass = 'badge-signature';
-              return `<span class="badge-tag ${badgeClass}">${t}</span>`;
-            }).join('')}
-          </div>
-          <button type="button" 
-                  class="menu-order-btn wa-trigger-btn" 
-                  data-custom-text="🌊 Hey Anchor Cafe! I'd like to place an order for ${encodeURIComponent(item.title)} (${item.price}${item.tierDetails ? ' - ' + encodeURIComponent(item.tierDetails) : ''}). Please confirm availability! 😋✨" 
-                  aria-label="Order ${item.title} via WhatsApp 7702897213">
-             <span>Order</span>
-             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </button>
-        </div>
-      </article>
-    `).join('');
-
-    // Attach click event for interactive image preview in lightbox
-    container.querySelectorAll('.menu-img-trigger').forEach(trigger => {
-      trigger.addEventListener('click', () => {
-        const imgSrc = trigger.getAttribute('data-img');
-        const imgTitle = trigger.getAttribute('data-title');
-        const imgPrice = trigger.getAttribute('data-price');
-        const imgDesc = trigger.getAttribute('data-desc');
-        openMenuLightbox(imgSrc, imgTitle, imgPrice, imgDesc);
-      });
+      `;
     });
+
+    html += '</div>';
+    container.innerHTML = html;
 
     container.querySelectorAll('.wa-trigger-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
