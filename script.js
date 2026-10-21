@@ -1446,7 +1446,7 @@ function initWhatsAppModal() {
   const modal = document.getElementById('waInquiryModal');
   const closeBtn = document.getElementById('waModalClose');
   const gridContainer = document.getElementById('waOptionsGrid');
-  const triggers = document.querySelectorAll('.btn-whatsapp, .wa-modal-trigger');
+  const triggers = document.querySelectorAll('.wa-modal-trigger');
 
   function openModal() {
     renderOptions();
@@ -1484,11 +1484,12 @@ function initWhatsAppModal() {
 
   triggers.forEach(el => {
     el.addEventListener('click', (e) => {
-      const customText = el.getAttribute('data-custom-text');
-      if (!customText) {
-        e.preventDefault();
-        openModal();
+      // Prevent navigation only for elements configured to trigger the 9-options modal
+      if (el.tagName === 'A' && el.getAttribute('href') && !el.classList.contains('wa-modal-trigger')) {
+        return;
       }
+      e.preventDefault();
+      openModal();
     });
   });
 
