@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCanvasWaves();
   initHeaderScroll();
   initMobileNav();
-  initPrintedDeckCarousel();
   initBeachTraySystem();
   initMenuSystem();
   initGalleryLightbox();
@@ -965,122 +964,7 @@ function initMobileNav() {
 }
 
 /* ==========================================================================
-   6. Interactive Printed Menu Card Deck & Flipbook Carousel
-   ========================================================================== */
-const PRINTED_DECK_PAGES = [
-  {
-    id: 0,
-    title: 'Hot Beverages Menu Card (Filter Coffee & Teas)',
-    badge: 'Page 1 of 4: Hot Beverages Menu Card (Filter Coffee & Teas)',
-    src: 'assets/images/card_hot_beverages.jpg',
-    alt: 'Hot Beverages Menu Card - Filter coffee and specialty teas at Anchor Cafe Ramapuram Beach',
-    waText: "☕ Hi Anchor Cafe! I'm looking at Page 1 (Hot Beverages) of your printed menu card. I'd like to order!"
-  },
-  {
-    id: 1,
-    title: '27 Signature Thick Shakes Menu Card (Milkshake, Blended, Thickshake)',
-    badge: 'Page 2 of 4: 27 Thick Shakes Menu Card (Milkshake, Blended, Thickshake)',
-    src: 'assets/images/card_thick_shakes.png',
-    alt: '27 Signature Thick Shakes Menu Card - Milkshake, Blended Shake, Thickshake at Anchor Cafe Ramapuram Beach',
-    waText: "🥤 Hi Anchor Cafe! I'm looking at Page 2 (27 Thick Shakes) of your printed menu card. I'd like to order!"
-  },
-  {
-    id: 2,
-    title: 'Mojitos & Artisanal Ice Creams Menu Card',
-    badge: 'Page 3 of 4: Handcrafted Mojitos & Gourmet Ice Creams Menu Card',
-    src: 'assets/images/card_mojitos_icecreams.png',
-    alt: 'Handcrafted Mojitos and Gourmet Ice Creams Menu Card at Anchor Cafe Ramapuram Beach',
-    waText: "🍹 Hi Anchor Cafe! I'm looking at Page 3 (Mojitos & Ice Creams) of your printed menu card. I'd like to order!"
-  },
-  {
-    id: 3,
-    title: 'Crispy Beach Bites & Savory Snacks Menu Card',
-    badge: 'Page 4 of 4: Crispy Beach Bites & Savory Snacks Menu Card',
-    src: 'assets/images/card_snacks.jpg',
-    alt: 'Crispy Beach Bites and Savory Snacks Menu Card at Anchor Cafe Ramapuram Beach',
-    waText: "🍟 Hi Anchor Cafe! I'm looking at Page 4 (Crispy Snacks) of your printed menu card. I'd like to order!"
-  }
-];
-
-let activeDeckPageIndex = 0;
-
-function updateDeckDisplay(index) {
-  if (index < 0) index = PRINTED_DECK_PAGES.length - 1;
-  if (index >= PRINTED_DECK_PAGES.length) index = 0;
-  activeDeckPageIndex = index;
-
-  const page = PRINTED_DECK_PAGES[activeDeckPageIndex];
-  const img = document.getElementById('deckActiveImg');
-  const indicator = document.getElementById('deckPageIndicator');
-  const waBtn = document.getElementById('deckWaBtn');
-  const tabs = document.querySelectorAll('.deck-tab');
-
-  if (img) {
-    img.style.opacity = '0.3';
-    setTimeout(() => {
-      img.src = page.src;
-      img.alt = page.alt;
-      img.style.opacity = '1';
-    }, 150);
-  }
-
-  if (indicator) {
-    indicator.textContent = page.badge;
-  }
-
-  if (waBtn) {
-    waBtn.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(page.waText)}`;
-  }
-
-  tabs.forEach(tab => {
-    const tabIdx = parseInt(tab.getAttribute('data-page'), 10);
-    tab.classList.toggle('active', tabIdx === activeDeckPageIndex);
-  });
-}
-
-function initPrintedDeckCarousel() {
-  const prevBtn = document.getElementById('deckPrevBtn');
-  const nextBtn = document.getElementById('deckNextBtn');
-  const zoomBtn = document.getElementById('deckZoomBtn');
-  const cardWrap = document.getElementById('deckCardWrap');
-  const tabs = document.querySelectorAll('.deck-tab');
-
-  prevBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    updateDeckDisplay(activeDeckPageIndex - 1);
-  });
-
-  nextBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    updateDeckDisplay(activeDeckPageIndex + 1);
-  });
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const p = parseInt(tab.getAttribute('data-page'), 10);
-      updateDeckDisplay(p);
-    });
-  });
-
-  function triggerZoom() {
-    const page = PRINTED_DECK_PAGES[activeDeckPageIndex];
-    openMenuLightbox(page.src, page.title, 'Authentic Printed Card', 'High-resolution official printed cafe menu card photographed at Anchor Cafe, Ramapuram Beach, Chirala.');
-  }
-
-  zoomBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    triggerZoom();
-  });
-
-  cardWrap?.addEventListener('click', () => {
-    triggerZoom();
-  });
-
-  updateDeckDisplay(0);
-}
-
-/* ==========================================================================
-   7. Beach Order Tray System (Live Multi-Item Cart & WhatsApp Checkout)
+   6. Beach Order Tray System (Live Multi-Item Cart & WhatsApp Checkout)
    ========================================================================== */
 window.beachTray = {
   items: {}, // key: itemId or itemId_variant -> { id, key, title, variant, price, quantity }
