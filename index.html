@@ -126,7 +126,6 @@
         <a href="#menu" class="nav-link">Menu</a>
         <a href="#story" class="nav-link">Our Story</a>
         <a href="#experience" class="nav-link">Experience</a>
-        <a href="#gallery" class="nav-link">Google Photos</a>
         <a href="#reviews" class="nav-link">Reviews</a>
         <a href="#location" class="nav-link">Location</a>
         <a href="#contact" class="nav-link">Contact</a>
@@ -169,7 +168,6 @@
         <a href="#menu" class="mobile-nav-link">Interactive Menu</a>
         <a href="#story" class="mobile-nav-link">Our Story</a>
         <a href="#experience" class="mobile-nav-link">Signature Experience</a>
-        <a href="#gallery" class="mobile-nav-link">Google Maps Photos</a>
         <a href="#reviews" class="mobile-nav-link">Guest Reviews</a>
         <a href="#location" class="mobile-nav-link">Find Us & Parking</a>
         <a href="#contact" class="mobile-nav-link">Contact & Hours</a>
@@ -830,76 +828,6 @@
     </section>
 
 
-    <!-- 6. Curated Coastal Gallery -->
-    <section class="section-padding gallery-section" id="gallery" aria-label="Google Maps Customer Gallery">
-      <div class="container">
-        <div class="section-header fade-in-element">
-          <span class="eyebrow">Google Maps Customer Photos</span>
-          <h2 class="section-title">Glimpses Along the Shore</h2>
-          <p class="section-subtitle">
-            Authentic moments, sea views, and drinks shared by our guests on Google Maps at Ramapuram Beach, Chirala (Choramandal Coast).
-          </p>
-        </div>
-
-        <div class="gallery-filters fade-in-element">
-          <button class="gallery-filter-btn active" data-filter="all">All Photos</button>
-          <button class="gallery-filter-btn" data-filter="sunset">Sunset Deck</button>
-          <button class="gallery-filter-btn" data-filter="brews">Coffee & Mojitos</button>
-          <button class="gallery-filter-btn" data-filter="shakes">Milkshakes & Ice Creams</button>
-          <button class="gallery-filter-btn" data-filter="snacks">Savory Snacks</button>
-        </div>
-
-        <div class="gallery-masonry" id="galleryMasonry">
-          <!-- Populated by script.js -->
-        </div>
-
-        <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 2.5rem;" class="fade-in-element">
-          <a href="https://www.google.com/maps/place/Anchor+cafe/@15.7791544,80.3866496,17z/data=!3m1!4b1!4m6!3m5!1s0x3a4a47ca7c15e715:0xb96388332838b5c9!8m2!3d15.7791544!4d80.3866496" 
-             id="gmapsViewPhotosBtn"
-             target="_blank" 
-             rel="noopener" 
-             class="btn btn-outline" 
-             aria-label="View all photos on Google Maps">
-            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>View 400+ Photos on Google Maps</span>
-          </a>
-          <a href="https://www.google.com/maps/place/Anchor+cafe/@15.7791544,80.3866496,17z/data=!3m1!4b1!4m6!3m5!1s0x3a4a47ca7c15e715:0xb96388332838b5c9!8m2!3d15.7791544!4d80.3866496" 
-             id="gmapsUploadPhotoBtn"
-             target="_blank" 
-             rel="noopener" 
-             class="btn btn-primary" 
-             aria-label="Upload photo to Google Maps">
-            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-            <span>Upload Photo to Google Maps</span>
-          </a>
-          <a href="https://wa.me/916303301334?text=%F0%9F%8C%8A%20Hey%20Anchor%20Cafe!%20I'd%20love%20to%20share%20my%20photo%20taken%20at%20Anchor%20Cafe%20(Ramapuram%20Beach,%20Chirala)%20to%20be%20featured%20on%20your%20gallery!%20%F0%9F%93%B8%E2%9C%A8" 
-             target="_blank" 
-             rel="noopener" 
-             class="btn btn-gold" 
-             aria-label="Share your photo directly on WhatsApp 6303301334">
-            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            <span>Share Photo on WhatsApp</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Lightbox Modal -->
-    <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Image Lightbox Viewer">
-      <div class="lightbox-content">
-        <button class="lightbox-close-btn" id="lightboxClose" aria-label="Close Lightbox">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-        <button class="lightbox-prev-btn" id="lightboxPrev" aria-label="Previous Image">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button class="lightbox-next-btn" id="lightboxNext" aria-label="Next Image">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <img src="" alt="" id="lightboxImg" class="lightbox-img">
-        <div id="lightboxCaption" class="lightbox-caption-text"></div>
-      </div>
-    </div>
 
     <!-- 7. Guest Reviews Section -->
     <section class="section-padding reviews-section" id="reviews" aria-label="Customer Reviews">
@@ -1174,7 +1102,6 @@
             <li><a href="#beach-services" class="footer-link" style="color: var(--color-gold); font-weight: 600;">Beach Experiences &amp; Events (New)</a></li>
             <li><a href="#menu" class="footer-link">Interactive Menu</a></li>
             <li><a href="#experience" class="footer-link">Choramandal Experience</a></li>
-            <li><a href="#gallery" class="footer-link">Google Maps Photos</a></li>
             <li><a href="#reviews" class="footer-link">Guest Reviews</a></li>
           </ul>
         </div>
