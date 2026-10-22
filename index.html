@@ -122,6 +122,7 @@
       <!-- Desktop Navigation -->
       <nav class="desktop-nav" aria-label="Primary Navigation">
         <a href="#beach-services" class="nav-link">Beach Experiences <span class="nav-badge-pill">NEW</span></a>
+        <a href="#beach-builder" class="nav-link">Event Customizer</a>
         <a href="#menu" class="nav-link">Menu</a>
         <a href="#story" class="nav-link">Our Story</a>
         <a href="#experience" class="nav-link">Experience</a>
@@ -164,6 +165,7 @@
       </div>
       <nav class="mobile-nav-list">
         <a href="#beach-services" class="mobile-nav-link" style="color: var(--color-gold); font-weight: 700;">🔥 Beach Experiences &amp; Events <span class="nav-badge-pill">NEW</span></a>
+        <a href="#beach-builder" class="mobile-nav-link">⚡ Event Customizer &amp; Quote</a>
         <a href="#menu" class="mobile-nav-link">Interactive Menu</a>
         <a href="#story" class="mobile-nav-link">Our Story</a>
         <a href="#experience" class="mobile-nav-link">Signature Experience</a>
@@ -437,26 +439,33 @@
           </div>
         </div>
 
-        <!-- Banner Action: Explore all beach events on WhatsApp & Customizer Toggle -->
+        <!-- Banner Action: Explore all beach events on WhatsApp & Customizer Link -->
         <div class="beach-events-cta-row fade-in-element">
           <a href="https://wa.me/917702897213?text=%F0%9F%8C%8A%20Hi%20Anchor%20Cafe!%20I%20want%20to%20explore%20all%20beach%20events%2C%20campfires%2C%20night%20tables%2C%20and%20sports%20at%20Ramapuram%20Beach." target="_blank" rel="noopener" class="btn btn-whatsapp beach-events-whatsapp-cta">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.758.459 3.474 1.33 4.982l-1.414 5.166 5.285-1.385c1.455.794 3.09 1.213 4.786 1.214h.004c5.507 0 9.99-4.478 9.99-9.985 0-2.667-1.039-5.176-2.924-7.062s-4.394-2.914-7.067-2.914zm5.82 14.28c-.244.687-1.42 1.312-1.957 1.393-.538.082-1.22.115-3.486-.826-2.898-1.203-4.757-4.148-4.902-4.341-.144-.194-1.176-1.564-1.176-2.984 0-1.42.744-2.118 1.009-2.404.265-.287.578-.358.771-.358.193 0 .386.002.553.01.177.008.416-.067.65.495.244.587.835 2.036.907 2.181.072.146.12.316.024.507-.096.192-.144.312-.288.481-.144.168-.303.376-.433.505-.145.144-.297.302-.128.591.169.289.75 1.237 1.61 2.003 1.106.985 2.037 1.291 2.326 1.435.289.145.457.121.626-.072.168-.193.722-.841.915-1.129.193-.288.386-.24.65-.144.265.096 1.683.794 1.972.938.289.145.481.216.553.336.072.12.072.697-.172 1.384z"/></svg>
             <span>Explore All Beach Events on WhatsApp (7702897213)</span>
           </a>
-          <button type="button" class="btn btn-outline-gold beach-events-customizer-toggle" id="beachCustomizerToggleBtn" onclick="toggleBeachCustomizer()">
+          <a href="#beach-builder" class="btn btn-outline-gold beach-events-customizer-toggle" id="beachCustomizerToggleBtn">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
             <span id="customizerToggleLabel">⚙️ Customize Event, Timing &amp; Hours</span>
-          </button>
+          </a>
         </div>
+      </div>
+    </section>
 
-        <!-- Integrated Custom Beach Experience & Live WhatsApp Builder (No separate pages needed!) -->
-        <div class="beach-customizer-drawer" id="beachCustomizerContainer" style="display: none;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(201, 168, 106, 0.3); padding-bottom: 1rem;">
+    <!-- 3. Ramapuram Beach Customizer & WhatsApp Quote (Top 3rd Slide / Always Shown) -->
+    <section class="section-padding beach-builder-section" id="beach-builder" aria-label="Ramapuram Beach Customizer & WhatsApp Quote">
+      <div class="container">
+        <div class="beach-customizer-drawer" id="beachCustomizerContainer">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(201, 168, 106, 0.3); padding-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
             <div>
               <span class="eyebrow" style="color: var(--color-gold-light); margin-bottom: 0.25rem;">Ramapuram Beach Customizer</span>
               <h3 style="font-family: var(--font-heading); color: #FFFFFF; font-size: 1.4rem; margin: 0;">Build Your Beach Experience &amp; WhatsApp Quote</h3>
             </div>
-            <button type="button" onclick="toggleBeachCustomizer()" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(201,168,106,0.4); color: var(--color-gold-light); border-radius: 50%; width: 36px; height: 36px; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;" aria-label="Close customizer">&times;</button>
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="background: rgba(201,168,106,0.18); border: 1px solid var(--color-gold); color: var(--color-gold-light); font-size: 0.72rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 999px;">⚡ Live WhatsApp Quote</span>
+              <button type="button" onclick="document.getElementById('experienceBuilderForm').reset(); updateWhatsAppMessage();" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(201,168,106,0.4); color: var(--color-gold-light); border-radius: var(--radius-full); padding: 0.3rem 0.75rem; font-size: 0.72rem; font-weight: 600; cursor: pointer;" title="Reset Form">🔄 Reset</button>
+            </div>
           </div>
 
           <div class="builder-layout-grid">

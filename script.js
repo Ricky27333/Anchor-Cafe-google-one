@@ -2052,35 +2052,28 @@ function initBeachExperienceBuilder() {
     });
   });
 
+  const container = document.getElementById('beachCustomizerContainer');
+  if (container) {
+    container.style.display = 'block';
+  }
+
   updateWhatsAppMessage();
 }
 
 function toggleBeachCustomizer() {
-  const container = document.getElementById('beachCustomizerContainer');
-  const label = document.getElementById('customizerToggleLabel');
-  if (!container) return;
-
-  const isHidden = container.style.display === 'none' || container.style.display === '';
-  if (isHidden) {
-    container.style.display = 'block';
-    if (label) label.textContent = '▲ Hide Experience Customizer';
-    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    updateWhatsAppMessage();
-  } else {
-    container.style.display = 'none';
-    if (label) label.textContent = '⚙️ Customize Event, Timing & Hours';
-  }
+  const target = document.getElementById('beach-builder') || document.getElementById('beachCustomizerContainer');
+  if (!target) return;
+  target.style.display = 'block';
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function openAndScrollToBuilder(serviceId) {
-  const container = document.getElementById('beachCustomizerContainer');
-  const label = document.getElementById('customizerToggleLabel');
-  if (container) {
-    container.style.display = 'block';
-    if (label) label.textContent = '▲ Hide Experience Customizer';
+  const target = document.getElementById('beach-builder') || document.getElementById('beachCustomizerContainer');
+  if (target) {
+    target.style.display = 'block';
   }
   selectServiceInBuilder(serviceId);
-  container?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function selectServiceInBuilder(serviceId) {
